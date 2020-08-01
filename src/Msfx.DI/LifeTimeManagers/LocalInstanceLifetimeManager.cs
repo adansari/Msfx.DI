@@ -1,19 +1,17 @@
-﻿using Msfx.DI.Factories;
+﻿using Msfx.DI.Containers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Msfx.DI.LifeTimeManagers
+namespace Msfx.DI.LifetimeManagers
 {
     public class LocalInstanceLifetimeManager: InstanceLifetimeManager
     {
-        public LocalInstanceLifetimeManager(Type type):base(type){ }
+        public LocalInstanceLifetimeManager(IDIContainer container,Type type):base(container,type) { }
         
         public override object CreateOrGetInstance(object[] args)
         {
-            return this.Factory.CreateInstance(this.Type, args);
+            object instance = this.Factory.CreateInstance(this.Type, args);
+
+            return instance;
         }
     }
 }

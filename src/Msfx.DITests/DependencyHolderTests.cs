@@ -1,8 +1,8 @@
 ﻿using FakeTypes.For.DITests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Msfx.DI.Factories;
-using Msfx.DI.LifeTimeManagers;
+using Msfx.DI.Containers;
+using Msfx.DI.LifetimeManagers;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -18,10 +18,10 @@ namespace Msfx.DI.Tests
             //arrange
             Type fakeType = typeof(foo);
 
-            Mock<InstanceLifetimeManager> mockInstanceLifetimeManager = new Mock<InstanceLifetimeManager>(It.IsAny<Type>());
+            Mock<InstanceLifetimeManager> mockInstanceLifetimeManager = new Mock<InstanceLifetimeManager>(It.IsAny<IDIContainer>(),It.IsAny<Type>());
             mockInstanceLifetimeManager.Setup(ltm => ltm.CreateOrGetInstance(It.IsAny<Object[]>())).Verifiable();
 
-            Mock<DependencyHolder> mockDHolder = new Mock<DependencyHolder>(fakeType) { CallBase = true };
+            Mock<DependencyHolder> mockDHolder = new Mock<DependencyHolder>(It.IsAny<IDIContainer>(),fakeType) { CallBase = true };
             mockDHolder.SetupGet(dh => dh.LifetimeManager).Returns(mockInstanceLifetimeManager.Object);
 
             //act

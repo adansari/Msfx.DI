@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Msfx.DI.Tests", "Msfx.DITes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Msfx.DI.FakeAssembly", "Msfx.DI.FakeAssembly\Msfx.DI.FakeAssembly.csproj", "{468A93E1-7F5D-48BE-8D3D-C030BBC72B83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Msfx.DI.Lab", "Msfx.DI.Lab\Msfx.DI.Lab.csproj", "{434B51F6-E947-4DC7-9E6C-27C61B2474C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{468A93E1-7F5D-48BE-8D3D-C030BBC72B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{468A93E1-7F5D-48BE-8D3D-C030BBC72B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{468A93E1-7F5D-48BE-8D3D-C030BBC72B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{434B51F6-E947-4DC7-9E6C-27C61B2474C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{434B51F6-E947-4DC7-9E6C-27C61B2474C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{434B51F6-E947-4DC7-9E6C-27C61B2474C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{434B51F6-E947-4DC7-9E6C-27C61B2474C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

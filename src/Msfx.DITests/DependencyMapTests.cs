@@ -1,7 +1,8 @@
 ﻿using FakeTypes.For.DITests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Msfx.DI.LifeTimeManagers;
+using Msfx.DI.Containers;
+using Msfx.DI.LifetimeManagers;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -17,9 +18,10 @@ namespace Msfx.DI.Tests
             //arrange
             Type type = typeof(foo);
             IDependencyMap dependencyMap;
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
 
             //act
-            dependencyMap = new DependencyMap(type);
+            dependencyMap = new DependencyMap(mockContainer.Object, type);
 
             //assert
             Assert.AreEqual(type.GetDependencyId(), dependencyMap.SourceDependencyId);
@@ -33,9 +35,10 @@ namespace Msfx.DI.Tests
             //arrange
             Type type = typeof(Ifoo);
             IDependencyMap dependencyMap;
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
 
             //act
-            dependencyMap = new DependencyMap(type);
+            dependencyMap = new DependencyMap(mockContainer.Object, type);
 
             //assert
             Assert.AreEqual(type.GetDependencyId(), dependencyMap.SourceDependencyId);
@@ -49,9 +52,10 @@ namespace Msfx.DI.Tests
             //arrange
             Type type = typeof(foo);
             IDependencyMap dependencyMap;
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
 
             //act
-            dependencyMap = new DependencyMap(type,InstanceType.Local);
+            dependencyMap = new DependencyMap(mockContainer.Object, type, InstanceType.Local);
 
             //assert
             Assert.AreEqual(type.GetDependencyId(), dependencyMap.SourceDependencyId);
@@ -65,9 +69,10 @@ namespace Msfx.DI.Tests
             //arrange
             Type type = typeof(abs_foo);
             IDependencyMap dependencyMap;
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
 
             //act
-            dependencyMap = new DependencyMap(type, InstanceType.Local);
+            dependencyMap = new DependencyMap(mockContainer.Object, type, InstanceType.Local);
 
             //assert
             Assert.AreEqual(type.GetDependencyId(), dependencyMap.SourceDependencyId);
@@ -82,8 +87,9 @@ namespace Msfx.DI.Tests
             Type type = typeof(foo);
             Mock<IDependencyHolder> mockDepHolder = new Mock<IDependencyHolder>();
             mockDepHolder.SetupGet(dh => dh.DependencyId).Returns(type.GetDependencyId());
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
 
-            IDependencyMap dependencyMap = new DependencyMap(type);
+            IDependencyMap dependencyMap = new DependencyMap(mockContainer.Object, type);
             dependencyMap.SecondaryDependencyHolder.Add(mockDepHolder.Object);
 
             //act

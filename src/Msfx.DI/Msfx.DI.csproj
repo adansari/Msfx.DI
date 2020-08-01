@@ -44,8 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributeBasedDIContext.cs" />
+    <Compile Include="Attributes\AutoInjectAttribute.cs" />
     <Compile Include="Attributes\CanBeInjectedForAttribute.cs" />
     <Compile Include="Attributes\InjectForTypeAttribute.cs" />
+    <Compile Include="Attributes\PreferredTypeAttribute.cs" />
+    <Compile Include="AutoInjectors\AutoInjector.cs" />
+    <Compile Include="AutoInjectors\AutoInjectionStrategy.cs" />
+    <Compile Include="AutoInjectors\ConstructorAutoInjector.cs" />
+    <Compile Include="AutoInjectors\MethodAutoInjector.cs" />
+    <Compile Include="AutoInjectors\PropertyAutoInjector.cs" />
+    <Compile Include="AutoInjectors\PublicFieldAutoInjector.cs" />
     <Compile Include="Containers\ConcurrentDictDIContainer.cs" />
     <Compile Include="Containers\IDIContainer.cs" />
     <Compile Include="DependencyHolder.cs" />
@@ -60,9 +68,9 @@
     <Compile Include="Factories\ActivatorInstanceFactory.cs" />
     <Compile Include="IDependencyHolder.cs" />
     <Compile Include="IDependencyMap.cs" />
-    <Compile Include="LifeTimeManagers\InstanceLifetimeManager.cs" />
-    <Compile Include="LifeTimeManagers\StaticInstanceLifetimeManager.cs" />
-    <Compile Include="LifeTimeManagers\LocalInstanceLifetimeManager.cs" />
+    <Compile Include="LifetimeManagers\InstanceLifetimeManager.cs" />
+    <Compile Include="LifetimeManagers\StaticInstanceLifetimeManager.cs" />
+    <Compile Include="LifetimeManagers\LocalInstanceLifetimeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registrars\CanBeInjectedDependencyRegistrar.cs" />
     <Compile Include="Registrars\DependencyRegistrar.cs" />

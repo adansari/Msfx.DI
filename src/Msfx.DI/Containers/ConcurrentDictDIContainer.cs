@@ -1,5 +1,5 @@
 ﻿using Msfx.DI.Exceptions;
-using Msfx.DI.LifeTimeManagers;
+using Msfx.DI.LifetimeManagers;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -27,6 +27,20 @@ namespace Msfx.DI.Containers
             return this.Container.ContainsKey(dependencyId);
         }
 
+        public List<IDependencyMap> SearchDependency(string typeName)
+        {
+            var searchedKeys = this.Container.Keys.Where(k => k.EndsWith("." + typeName)).ToList();
+
+            List<IDependencyMap> dependencyMaps = new List<IDependencyMap>();
+
+            foreach(string searchedKey in searchedKeys)
+            {
+                dependencyMaps.Add(this.GetDependencyMap(searchedKey));
+            }
+
+            return dependencyMaps;
+        }
+
         public virtual IDependencyMap GetDependencyMap(string dependencyId)
         {
             IDependencyMap dependencyMap;
@@ -43,7 +57,7 @@ namespace Msfx.DI.Containers
 
         public bool Register(string dependencyId, Type type, InstanceType instanceType)
         {
-            return this.Container.TryAdd(dependencyId, new DependencyMap(type, instanceType));
+            return this.Container.TryAdd(dependencyId, new DependencyMap(this,type, instanceType));
         }
     }
 }

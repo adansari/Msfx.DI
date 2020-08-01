@@ -1,10 +1,29 @@
 ﻿using System;
-using Msfx.DI.LifeTimeManagers;
+using Msfx.DI.Containers;
+using Msfx.DI.LifetimeManagers;
 
 namespace Msfx.DI
 {
     public class DependencyHolder : IDependencyHolder
     {
+        public DependencyHolder(IDIContainer container,Type dependencyType)
+        {
+            this.Container = container;
+            this.DependencyType = dependencyType;
+            this.InstanceType = InstanceType.Static;
+            this.LifetimeManager = InstanceLifetimeManager.GetInstanceLifetimeManager(this.Container, DependencyType, this.InstanceType);
+        }
+
+        public DependencyHolder(IDIContainer container,Type dependencyType, InstanceType instanceType)
+        {
+            this.Container = container;
+            this.DependencyType = dependencyType;
+            this.InstanceType = instanceType;
+            this.LifetimeManager = InstanceLifetimeManager.GetInstanceLifetimeManager(this.Container, DependencyType, this.InstanceType);
+        }
+
+        public IDIContainer Container { get; }
+
         public virtual string DependencyId
         {
             get
@@ -17,20 +36,6 @@ namespace Msfx.DI
         public virtual InstanceLifetimeManager LifetimeManager { get; }
 
         public Type DependencyType { get; }
-
-        public DependencyHolder(Type dependencyType)
-        {
-            this.DependencyType = dependencyType;
-            this.InstanceType = InstanceType.Static;
-            this.LifetimeManager = InstanceLifetimeManager.GetInstanceLifetimeManager(DependencyType,this.InstanceType);
-        }
-
-        public DependencyHolder(Type dependencyType,InstanceType instanceType)
-        {
-            this.DependencyType = dependencyType;
-            this.InstanceType = instanceType;
-            this.LifetimeManager = InstanceLifetimeManager.GetInstanceLifetimeManager(DependencyType, this.InstanceType);
-        }
 
         public object GetInstance(object[] args)
         {

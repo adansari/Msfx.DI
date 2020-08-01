@@ -23,10 +23,10 @@ namespace Msfx.DI.Registrars.Tests
         public void Init()
         {
             fakeConDict = new ConcurrentDictionary<string, IDependencyMap>();
-            fakeConDict.TryAdd(typeof(Animal).GetDependencyId(), new DependencyMap(typeof(Animal)));
-            fakeConDict.TryAdd(typeof(Monkey).GetDependencyId(), new DependencyMap(typeof(Monkey)));
-            fakeConDict.TryAdd(typeof(Donkey).GetDependencyId(), new DependencyMap(typeof(Donkey)));
-            fakeConDict.TryAdd(typeof(Dog).GetDependencyId(), new DependencyMap(typeof(Dog)));
+            fakeConDict.TryAdd(typeof(Animal).GetDependencyId(), new DependencyMap(It.IsAny<IDIContainer>(), typeof(Animal)));
+            fakeConDict.TryAdd(typeof(Monkey).GetDependencyId(), new DependencyMap(It.IsAny<IDIContainer>(), typeof(Monkey)));
+            fakeConDict.TryAdd(typeof(Donkey).GetDependencyId(), new DependencyMap(It.IsAny<IDIContainer>(), typeof(Donkey)));
+            fakeConDict.TryAdd(typeof(Dog).GetDependencyId(), new DependencyMap(It.IsAny<IDIContainer>(), typeof(Dog)));
 
             mockDIContainer = new Mock<ConcurrentDictDIContainer>();
             mockDIContainer.SetupGet(c => c.Container).Returns(fakeConDict);

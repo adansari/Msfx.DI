@@ -21,11 +21,13 @@ namespace Msfx.DI
 
         public virtual DependencyRegistrar Registrar { get; }
 
-        public override void Scan()
+        public override DIContext Scan()
         {
             var typesScanned = this.Scanner.Scan();
             
             this.Registrar.Register(typesScanned);
+
+            return this;
 
         }
     }

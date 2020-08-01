@@ -1,8 +1,9 @@
 ﻿using FakeTypes.For.NonDITests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Msfx.DI.Containers;
 using Msfx.DI.Factories;
-using Msfx.DI.LifeTimeManagers;
+using Msfx.DI.LifetimeManagers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -11,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Msfx.DI.LifeTimeManagers.Tests
+namespace Msfx.DI.LifetimeManagers.Tests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
@@ -22,7 +23,7 @@ namespace Msfx.DI.LifeTimeManagers.Tests
         {
             //arrage
             Mock<InstanceFactory> mockFactory = new Mock<InstanceFactory>();
-            Mock<LocalInstanceLifetimeManager> mockLifetimeManager = new Mock<LocalInstanceLifetimeManager>(typeof(foo)) { CallBase = true };
+            Mock<LocalInstanceLifetimeManager> mockLifetimeManager = new Mock<LocalInstanceLifetimeManager>(It.IsAny<IDIContainer>(),typeof(foo)) { CallBase = true };
             mockLifetimeManager.SetupGet(ltm => ltm.Factory).Returns(mockFactory.Object);
 
             //act

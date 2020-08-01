@@ -77,9 +77,9 @@
     <Compile Include="Factories\ActivatorInstanceFactoryTests.cs" />
     <Compile Include="Factories\InstanceFactoryTests.cs" />
     <Compile Include="AttributeBasedDIContext_CurrentNamespace_IntgTests.cs" />
-    <Compile Include="LifeTimeManagers\InstanceLifetimeManagerTests.cs" />
-    <Compile Include="LifeTimeManagers\LocalInstanceLifetimeManagerTests.cs" />
-    <Compile Include="LifeTimeManagers\StaticInstanceLifetimeManagerTests.cs" />
+    <Compile Include="LifetimeManagers\InstanceLifetimeManagerTests.cs" />
+    <Compile Include="LifetimeManagers\LocalInstanceLifetimeManagerTests.cs" />
+    <Compile Include="LifetimeManagers\StaticInstanceLifetimeManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registrars\CanBeInjectedDependencyRegistrarTests.cs" />
     <Compile Include="Registrars\DependencyRegistrarTests.cs" />

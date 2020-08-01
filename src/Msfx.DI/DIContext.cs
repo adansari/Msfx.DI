@@ -1,4 +1,5 @@
 ﻿using Msfx.DI.Containers;
+using Msfx.DI.Exceptions;
 using Msfx.DI.Scanners;
 using System;
 using System.Reflection;
@@ -40,7 +41,7 @@ namespace Msfx.DI
 
         public virtual IDIContainer Container { get { return this._container; } }
 
-        public abstract void Scan();
+        public abstract DIContext Scan();
 
         public virtual T Inject<T>(params object[] args)
         {
@@ -50,6 +51,33 @@ namespace Msfx.DI
             {
                 //Todo: For Interface/Abs Class dont have any Preferred imple class, PrimaryDependencyHolder is null - Need to handle 
                 return (T)this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder.GetInstance(args);
+            }
+
+            return default(T);
+        }
+
+        public virtual T Inject<T>(string targetTypeName,params object[] args)
+        {
+            string dependencyId = typeof(T).GetDependencyId();
+
+            var targetDependency = this.Container.SearchDependency(targetTypeName);
+
+            if(targetDependency.Count ==1)
+            {
+                IDependencyHolder primaryDependencyHolder = targetDependency[0].PrimaryDependencyHolder;
+
+                if (primaryDependencyHolder != null)
+                {
+                    return (T)primaryDependencyHolder.GetInstance(args);
+                }
+            }
+            else
+            {
+                // Count ==0 => Error: No target type found
+
+                // Count > 1 => Error: Ambiguity more thane one target type found
+
+                throw new DIException(targetTypeName + " type not found or are multiple with same name in this DI scope");
             }
 
             return default(T);

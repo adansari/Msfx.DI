@@ -1,9 +1,10 @@
 ﻿using FakeTypes.For.NonDITests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Msfx.DI.LifeTimeManagers;
+using Msfx.DI.LifetimeManagers;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Msfx.DI.Containers.Tests
@@ -25,7 +26,7 @@ namespace Msfx.DI.Containers.Tests
             fakeType = typeof(foo);
             fakeDependencyId = fakeType.GetDependencyId();
             fakeDependencyId2 = typeof(Ifoo).GetDependencyId();
-            fakeDependencyMap = new DependencyMap(fakeType);
+            fakeDependencyMap = new DependencyMap(It.IsAny<IDIContainer>(), fakeType);
 
             fakeDict = new ConcurrentDictionary<string, IDependencyMap>();
             fakeDict.TryAdd(fakeType.GetDependencyId(), fakeDependencyMap);
@@ -76,6 +77,21 @@ namespace Msfx.DI.Containers.Tests
             //Assert
             Assert.AreEqual(true, actualTrue);
             Assert.AreEqual(false, actualFalse);
+        }
+
+        [TestMethod]
+        public void ConcurrentDictDIContainer_SearchDependency_Test()
+        {
+            //arrange
+            List<IDependencyMap> actualTrue, actualFalse;
+
+            //act
+            actualTrue = mockDIContainer.Object.SearchDependency("foo");
+            actualFalse = mockDIContainer.Object.SearchDependency("Foo");
+
+            //Assert
+            Assert.AreEqual(true, actualTrue.Contains(fakeDependencyMap));
+            Assert.AreEqual(false, actualFalse.Count>0);
         }
 
         [TestMethod]

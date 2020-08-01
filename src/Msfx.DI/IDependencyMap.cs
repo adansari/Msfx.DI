@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Msfx.DI.Containers;
+using System.Collections.Generic;
 
 namespace Msfx.DI
 {
     public interface IDependencyMap
     {
+        IDIContainer Container { get; }
         bool IsAbstractOrInterface { get; }
         IDependencyHolder PrimaryDependencyHolder { get; set; }
         List<IDependencyHolder> SecondaryDependencyHolder { get; }

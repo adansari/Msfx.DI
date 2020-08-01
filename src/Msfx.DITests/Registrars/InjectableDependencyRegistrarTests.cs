@@ -3,7 +3,7 @@ using FakeTypes.For.NonDITests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Msfx.DI.Containers;
-using Msfx.DI.LifeTimeManagers;
+using Msfx.DI.LifetimeManagers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;

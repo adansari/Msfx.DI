@@ -1,11 +1,12 @@
 ﻿using FakeTypes.For.DITests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Msfx.DI.Containers;
 using Msfx.DI.Factories;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Msfx.DI.LifeTimeManagers.Tests
+namespace Msfx.DI.LifetimeManagers.Tests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
@@ -18,7 +19,7 @@ namespace Msfx.DI.LifeTimeManagers.Tests
             foo afoo = new foo() { strProp = "state"};
             
             Mock<InstanceFactory> mockFactory = new Mock<InstanceFactory>();
-            Mock<StaticInstanceLifetimeManager> mockLifetimeManager = new Mock<StaticInstanceLifetimeManager>(typeof(foo)) { CallBase = true };
+            Mock<StaticInstanceLifetimeManager> mockLifetimeManager = new Mock<StaticInstanceLifetimeManager>(It.IsAny<IDIContainer>(), typeof(foo)) { CallBase = true };
             mockLifetimeManager.SetupGet(ltm => ltm.Factory).Returns(mockFactory.Object);
             mockLifetimeManager.SetupGet(ltm => ltm.Instance).Returns(afoo);
 
@@ -36,7 +37,7 @@ namespace Msfx.DI.LifeTimeManagers.Tests
         {
             //arrage
             Mock<InstanceFactory> mockFactory = new Mock<InstanceFactory>();
-            Mock<StaticInstanceLifetimeManager> mockLifetimeManager = new Mock<StaticInstanceLifetimeManager>(typeof(foo)) { CallBase = true };
+            Mock<StaticInstanceLifetimeManager> mockLifetimeManager = new Mock<StaticInstanceLifetimeManager>(It.IsAny<IDIContainer>(),typeof(foo)) { CallBase = true };
             mockLifetimeManager.SetupGet(ltm => ltm.Factory).Returns(mockFactory.Object);
             mockLifetimeManager.SetupGet(ltm => ltm.Instance).Returns((foo)null);
 

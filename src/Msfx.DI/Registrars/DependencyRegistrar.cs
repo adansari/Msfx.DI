@@ -26,7 +26,6 @@ namespace Msfx.DI.Registrars
 
         public virtual IDIContainer Container { get { return this._container; } }
         public virtual DependencyRegistrar Successor { get { return this._successor; } }
-
         public virtual bool CanMoveNext{ get { return this._canMoveNext; } }
 
         public virtual void RegisterNext(IEnumerable<Type> types)

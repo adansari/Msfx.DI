@@ -18,6 +18,20 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
+        public void CurrentNamespaceRecur_Class_Injection_Ctor_With_Param()
+        {
+            //arrange
+            diCtx.Scan();
+
+            //act
+            FakeTypes.For.DITests.foo afoo = diCtx.Inject<FakeTypes.For.DITests.foo>("prop value");
+
+            //assert
+            Assert.IsNotNull(afoo);
+            Assert.AreEqual("prop value",afoo.strProp);
+        }
+
+        [TestMethod]
         public void CurrentNamespaceRecur_Class_Injection()
         {
             //arrange

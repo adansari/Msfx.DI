@@ -1,6 +1,6 @@
 ﻿using Msfx.DI;
 using Msfx.DI.Attributes;
-using Msfx.DI.LifeTimeManagers;
+using Msfx.DI.LifetimeManagers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -23,12 +23,14 @@ namespace FakeTypes.For.NonDITests
 namespace FakeTypes.For.DITests
 {
     [ExcludeFromCodeCoverage]
-    public class Boot { }
+    public class Boot {}
 
     [ExcludeFromCodeCoverage]
     [Injectable]
     public class foo
     {
+        public foo() { }
+        public foo(string prop) { strProp = prop; }
         public string strProp { get; set; }
     }
 

@@ -1,4 +1,4 @@
-﻿using Msfx.DI.LifeTimeManagers;
+﻿using Msfx.DI.LifetimeManagers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
