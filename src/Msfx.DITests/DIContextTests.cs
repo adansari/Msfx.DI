@@ -3,6 +3,7 @@ using FakeTypes.For.DITests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Msfx.DI.Containers;
+using Msfx.DI.Exceptions;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -197,6 +198,87 @@ namespace Msfx.DI.Tests
 
             //assert
             Assert.IsNull(cat);
+        }
+
+        [TestMethod]
+        public void DIContext_InjectByName_Test()
+        {
+            //arrange
+            Mock<IDependencyHolder> mockDependencyHolder = new Mock<IDependencyHolder>();
+            mockDependencyHolder.Setup(dh => dh.GetInstance(It.IsAny<object[]>())).Returns(new foo());
+
+            Mock<IDependencyMap> mockDependencyMap = new Mock<IDependencyMap>();
+            mockDependencyMap.Setup(dm => dm.PrimaryDependencyHolder).Returns(mockDependencyHolder.Object);
+
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
+            mockContainer.Setup(c => c.SearchDependency(It.IsAny<string>())).Returns(new List<IDependencyMap>() { mockDependencyMap.Object });
+
+            Mock<DIContext> mockDIContext = new Mock<DIContext>(typeof(Boot)) { CallBase = true };
+            mockDIContext.SetupGet(ctx => ctx.Container).Returns(mockContainer.Object);
+
+            //act
+            foo afoo = mockDIContext.Object.InjectByName<foo>("foo");
+
+            //assert
+            Assert.IsInstanceOfType(afoo, typeof(foo));
+        }
+
+        [TestMethod]
+        public void DIContext_InjectByName_Nonclass_Test()
+        {
+            //arrange
+
+            Mock<IDependencyMap> mockDependencyMap = new Mock<IDependencyMap>();
+
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
+            mockContainer.Setup(c => c.SearchDependency(It.IsAny<string>())).Returns(new List<IDependencyMap>() { mockDependencyMap.Object });
+
+            Mock<DIContext> mockDIContext = new Mock<DIContext>(typeof(Boot)) { CallBase = true };
+            mockDIContext.SetupGet(ctx => ctx.Container).Returns(mockContainer.Object);
+
+            //act
+            Ifoo afoo = mockDIContext.Object.InjectByName<Ifoo>("Ifoo");
+
+            //assert
+            Assert.IsNull(afoo);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NonInjectableTypeException))]
+        public void DIContext_InjectByName_TypeNotFound_Test()
+        {
+            //arrange
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
+            mockContainer.Setup(c => c.SearchDependency(It.IsAny<string>())).Returns(new List<IDependencyMap>());
+
+            Mock<DIContext> mockDIContext = new Mock<DIContext>(typeof(Boot)) { CallBase = true };
+            mockDIContext.SetupGet(ctx => ctx.Container).Returns(mockContainer.Object);
+
+            //act
+            foo foo = mockDIContext.Object.InjectByName<foo>("NotExists");
+
+            //assert
+            Assert.IsNull(foo);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InjectionAmbiguityException))]
+        public void DIContext_InjectByName_MultipleTypeFound_Test()
+        {
+            //arrange
+            Mock<IDependencyMap> mockDependencyMap1 = new Mock<IDependencyMap>();
+            Mock<IDependencyMap> mockDependencyMap2 = new Mock<IDependencyMap>();
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
+            mockContainer.Setup(c => c.SearchDependency(It.IsAny<string>())).Returns(new List<IDependencyMap>() { mockDependencyMap1.Object, mockDependencyMap2.Object });
+
+            Mock<DIContext> mockDIContext = new Mock<DIContext>(typeof(Boot)) { CallBase = true };
+            mockDIContext.SetupGet(ctx => ctx.Container).Returns(mockContainer.Object);
+
+            //act
+            foo foo = mockDIContext.Object.InjectByName<foo>("NotExists");
+
+            //assert
+            Assert.IsNull(foo);
         }
     }
 }

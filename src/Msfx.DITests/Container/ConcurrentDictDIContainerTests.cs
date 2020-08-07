@@ -80,7 +80,7 @@ namespace Msfx.DI.Containers.Tests
         }
 
         [TestMethod]
-        public void ConcurrentDictDIContainer_SearchDependency_Test()
+        public void ConcurrentDictDIContainer_SearchDependencyName_Test()
         {
             //arrange
             List<IDependencyMap> actualTrue, actualFalse;
@@ -92,6 +92,49 @@ namespace Msfx.DI.Containers.Tests
             //Assert
             Assert.AreEqual(true, actualTrue.Contains(fakeDependencyMap));
             Assert.AreEqual(false, actualFalse.Count>0);
+        }
+
+        [TestMethod]
+        public void ConcurrentDictDIContainer_SearchDependency_PartialName_Test()
+        {
+            //arrange FakeTypes.For.NonDITests
+            List<IDependencyMap> actualTrue, actualFalse;
+
+            //act
+            actualTrue = mockDIContainer.Object.SearchDependency("NonDITests.foo");
+            actualFalse = mockDIContainer.Object.SearchDependency("NonDITests.Foo");
+
+            //Assert
+            Assert.AreEqual(true, actualTrue.Contains(fakeDependencyMap));
+            Assert.AreEqual(false, actualFalse.Count > 0);
+        }
+
+        [TestMethod]
+        public void ConcurrentDictDIContainer_SearchDependency_FullName_Test()
+        {
+            //arrange FakeTypes.For.NonDITests
+            List<IDependencyMap> actualTrue, actualFalse;
+
+            //act
+            actualTrue = mockDIContainer.Object.SearchDependency("FakeTypes.For.NonDITests.foo");
+            actualFalse = mockDIContainer.Object.SearchDependency("FakeTypes.For.NonDITests.Foo");
+
+            //Assert
+            Assert.AreEqual(true, actualTrue.Contains(fakeDependencyMap));
+            Assert.AreEqual(false, actualFalse.Count > 0);
+        }
+
+        [TestMethod]
+        public void ConcurrentDictDIContainer_SearchDependency_With_Dots_Test()
+        {
+            //arrange FakeTypes.For.NonDITests
+            List<IDependencyMap> actualTrue;
+
+            //act
+            actualTrue = mockDIContainer.Object.SearchDependency(".NonDITests.foo.");
+
+            //Assert
+            Assert.AreEqual(true, actualTrue.Contains(fakeDependencyMap));
         }
 
         [TestMethod]

@@ -17,13 +17,13 @@ namespace Msfx.DI.Lab
 
             //Level5 level5 = di.Inject<Level5>();
 
-            Animal dog = di.Inject<Animal>("Dog","Black");
+            Animal dog = di.InjectByName<Animal>("Dog","Black");
             dog.MakeSound();
 
-            Animal cat = di.Inject<Animal>("Cat");
+            Animal cat = di.InjectByName<Animal>("DI.Lab.Cat");
             cat.MakeSound();
 
-            Animal none = di.Inject<Animal>("Tiger");
+            Animal none = di.InjectByName<Animal>("Tiger");
             none.MakeSound();
 
             Console.Read();

@@ -56,7 +56,7 @@ namespace Msfx.DI
             return default(T);
         }
 
-        public virtual T Inject<T>(string targetTypeName,params object[] args)
+        public virtual T InjectByName<T>(string targetTypeName,params object[] args)
         {
             string dependencyId = typeof(T).GetDependencyId();
 
@@ -73,11 +73,11 @@ namespace Msfx.DI
             }
             else
             {
-                // Count ==0 => Error: No target type found
+                if (targetDependency.Count == 0)
+                    throw new NonInjectableTypeException(targetTypeName + " dependency not found or is not attributed as Injectable");
 
-                // Count > 1 => Error: Ambiguity more thane one target type found
-
-                throw new DIException(targetTypeName + " type not found or are multiple with same name in this DI scope");
+                else
+                    throw new InjectionAmbiguityException(targetTypeName + " dependency has multiple matching type, prefix the namespace(s) to enforce the strict the search");
             }
 
             return default(T);

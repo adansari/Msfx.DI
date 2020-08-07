@@ -29,7 +29,7 @@ namespace Msfx.DI.Containers
 
         public List<IDependencyMap> SearchDependency(string typeName)
         {
-            var searchedKeys = this.Container.Keys.Where(k => k.EndsWith("." + typeName)).ToList();
+            var searchedKeys = this.Container.Keys.Where(k => k.EndsWith("." + typeName.Trim('.')) || k.Equals(typeName.Trim('.'))).ToList();
 
             List<IDependencyMap> dependencyMaps = new List<IDependencyMap>();
 
