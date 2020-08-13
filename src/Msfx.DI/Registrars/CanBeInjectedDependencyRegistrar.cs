@@ -41,7 +41,7 @@ namespace Msfx.DI.Registrars
 
                         IDependencyMap sourceDependencyMap = this.Container.GetDependencyMap(sourceDependencyId);
 
-                        sourceDependencyMap.SecondaryDependencyHolder.Add(this.Container.GetDependencyMap(targetDependencyId).PrimaryDependencyHolder);
+                        sourceDependencyMap.SecondaryDependencyHolders.Add(this.Container.GetDependencyMap(targetDependencyId).PrimaryDependencyHolder);
                     }
                 }
             }

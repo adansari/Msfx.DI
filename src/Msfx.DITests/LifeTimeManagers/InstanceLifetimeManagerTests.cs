@@ -1,6 +1,7 @@
 ﻿using FakeTypes.For.NonDITests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Msfx.DI.AutoInjectors;
 using Msfx.DI.Containers;
 using Msfx.DI.LifetimeManagers;
 using System;
@@ -24,7 +25,7 @@ namespace Msfx.DI.LifetimeManagers.Tests
             InstanceLifetimeManager localInstanceLifetimeManager, staticInstanceLifetimeManager, invalidLifetimeManager;
 
             //act
-            localInstanceLifetimeManager = InstanceLifetimeManager.GetInstanceLifetimeManager(mockContainer.Object ,typeof(foo),InstanceType.Local);
+            localInstanceLifetimeManager = InstanceLifetimeManager.GetInstanceLifetimeManager(mockContainer.Object, typeof(foo), InstanceType.Local);
             staticInstanceLifetimeManager = InstanceLifetimeManager.GetInstanceLifetimeManager(mockContainer.Object, typeof(foo), InstanceType.Static);
             invalidLifetimeManager = InstanceLifetimeManager.GetInstanceLifetimeManager(mockContainer.Object, typeof(foo), InstanceType.Invalid);
 

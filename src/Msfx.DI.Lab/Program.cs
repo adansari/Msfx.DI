@@ -13,18 +13,16 @@ namespace Msfx.DI.Lab
     {
         static void Main(string[] args)
         {
-            DIContext di = new AttributeBasedDIContext(typeof(Program), Scanners.DependencyScanTarget.CurrentNamespaceRecursive).Scan();
+            DIContext di = new AttributeBasedDIContext(typeof(Program)).Scan();
 
-            //Level5 level5 = di.Inject<Level5>();
+            Computer desktop = di.Inject<Desktop>();
 
-            Animal dog = di.InjectByName<Animal>("Dog","Black");
-            dog.MakeSound();
+            desktop.Operate();
 
-            Animal cat = di.InjectByName<Animal>("DI.Lab.Cat");
-            cat.MakeSound();
 
-            Animal none = di.InjectByName<Animal>("Tiger");
-            none.MakeSound();
+            Computer Laptop = di.Inject<Laptop>();
+
+            Laptop.Operate();
 
             Console.Read();
         }

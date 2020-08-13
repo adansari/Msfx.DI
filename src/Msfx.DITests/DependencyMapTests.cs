@@ -90,7 +90,7 @@ namespace Msfx.DI.Tests
             Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
 
             IDependencyMap dependencyMap = new DependencyMap(mockContainer.Object, type);
-            dependencyMap.SecondaryDependencyHolder.Add(mockDepHolder.Object);
+            dependencyMap.SecondaryDependencyHolders.Add(mockDepHolder.Object);
 
             //act
             IDependencyHolder actualDepHolder = dependencyMap.GetSecondaryDependencyHolder(type.GetDependencyId());

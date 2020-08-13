@@ -60,6 +60,7 @@
     <Compile Include="DependencyMap.cs" />
     <Compile Include="DIContext.cs" />
     <Compile Include="Attributes\InjectableAttribute.cs" />
+    <Compile Include="Exceptions\PrimaryOrPreferredTargetDependencyNotFound.cs" />
     <Compile Include="Exceptions\DIException.cs" />
     <Compile Include="Exceptions\InjectionAmbiguityException.cs" />
     <Compile Include="Exceptions\NonInjectableTypeException.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Factories\ActivatorInstanceFactory.cs" />
     <Compile Include="IDependencyHolder.cs" />
     <Compile Include="IDependencyMap.cs" />
+    <Compile Include="LifetimeManagers\InstanceCreatedEventArgs.cs" />
     <Compile Include="LifetimeManagers\InstanceLifetimeManager.cs" />
     <Compile Include="LifetimeManagers\StaticInstanceLifetimeManager.cs" />
     <Compile Include="LifetimeManagers\LocalInstanceLifetimeManager.cs" />

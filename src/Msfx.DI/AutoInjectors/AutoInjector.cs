@@ -1,7 +1,9 @@
-﻿using Msfx.DI.Containers;
+﻿using Msfx.DI.Attributes;
+using Msfx.DI.Containers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,5 +42,31 @@ namespace Msfx.DI.AutoInjectors
         }
 
         public abstract void Inject(object instance);
+
+        public virtual string GetMemberPreferredDependency(MemberInfo memberInfo)
+        {
+            if (Attribute.IsDefined(memberInfo, typeof(PreferredTypeAttribute)))
+            {
+                PreferredTypeAttribute preferredTypeAttribute = Attribute.GetCustomAttributes(memberInfo, typeof(PreferredTypeAttribute))
+                                                                       .FirstOrDefault() as PreferredTypeAttribute;
+
+                return preferredTypeAttribute.Type.GetDependencyId();
+            }
+
+            return null;
+        }
+
+        public virtual string GetParamPreferredDependency(ParameterInfo paramInfo)
+        {
+            if (Attribute.IsDefined(paramInfo, typeof(PreferredTypeAttribute)))
+            {
+                PreferredTypeAttribute preferredTypeAttribute = Attribute.GetCustomAttributes(paramInfo, typeof(PreferredTypeAttribute))
+                                                                       .FirstOrDefault() as PreferredTypeAttribute;
+
+                return preferredTypeAttribute.Type.GetDependencyId();
+            }
+
+            return null;
+        }
     }
 }

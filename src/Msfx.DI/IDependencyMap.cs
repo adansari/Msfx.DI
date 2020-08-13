@@ -8,7 +8,7 @@ namespace Msfx.DI
         IDIContainer Container { get; }
         bool IsAbstractOrInterface { get; }
         IDependencyHolder PrimaryDependencyHolder { get; set; }
-        List<IDependencyHolder> SecondaryDependencyHolder { get; }
+        List<IDependencyHolder> SecondaryDependencyHolders { get; }
         string SourceDependencyId { get; }
         IDependencyHolder GetSecondaryDependencyHolder(string depedencyId);
     }

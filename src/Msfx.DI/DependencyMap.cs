@@ -13,7 +13,7 @@ namespace Msfx.DI
 
             this.SourceDependencyId = sourceDependencyType.GetDependencyId();
 
-            this.SecondaryDependencyHolder = new List<IDependencyHolder>();
+            this.SecondaryDependencyHolders = new List<IDependencyHolder>();
 
             if (sourceDependencyType.IsAbstract || sourceDependencyType.IsInterface)
             {
@@ -30,7 +30,7 @@ namespace Msfx.DI
 
             this.SourceDependencyId = sourceDependencyType.GetDependencyId();
 
-            this.SecondaryDependencyHolder = new List<IDependencyHolder>();
+            this.SecondaryDependencyHolders = new List<IDependencyHolder>();
 
             if (sourceDependencyType.IsAbstract || sourceDependencyType.IsInterface)
             {
@@ -45,10 +45,10 @@ namespace Msfx.DI
         public string SourceDependencyId { get; }
         public bool IsAbstractOrInterface { get; } = false;
         public IDependencyHolder PrimaryDependencyHolder { get; set; }
-        public List<IDependencyHolder> SecondaryDependencyHolder { get;}
+        public List<IDependencyHolder> SecondaryDependencyHolders { get;}
         public IDependencyHolder GetSecondaryDependencyHolder(string depedencyId)
         {
-            return this.SecondaryDependencyHolder.Find(d => d.DependencyId == depedencyId);
+            return this.SecondaryDependencyHolders.Find(d => d.DependencyId == depedencyId);
         }
     }
 }

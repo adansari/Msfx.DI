@@ -70,6 +70,10 @@
   <ItemGroup>
     <Compile Include="AttributeBasedDIContextTests.cs" />
     <Compile Include="AttributeBasedDIContext_CurrentNamespaceRecur_IntgTests.cs" />
+    <Compile Include="AutoInjectors\AutoInjectionStrategyTests.cs" />
+    <Compile Include="AutoInjectors\AutoInjectorTests.cs" />
+    <Compile Include="AutoInjectors\FMPCAutoInjectionStrategyTests.cs" />
+    <Compile Include="AutoInjectors\PropertyAutoInjectorTests.cs" />
     <Compile Include="Container\ConcurrentDictDIContainerTests.cs" />
     <Compile Include="DependencyHolderTests.cs" />
     <Compile Include="DependencyMapTests.cs" />

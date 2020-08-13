@@ -51,7 +51,7 @@ namespace Msfx.DI.Registrars.Tests
             mockDIContainer.Verify(c => c.GetDependencyMap(It.IsAny<string>()), Times.Never());
             mockCanBeInjectableRegistrar.Verify(idr => idr.RegisterNext(It.IsAny<IEnumerable<Type>>()));
             Assert.IsTrue(mockDIContainer.Object.GetDependencyMap(typeof(Monkey).GetDependencyId()).PrimaryDependencyHolder.DependencyId== typeof(Monkey).GetDependencyId());
-            Assert.IsTrue(mockDIContainer.Object.GetDependencyMap(typeof(Monkey).GetDependencyId()).SecondaryDependencyHolder.Count == 0);
+            Assert.IsTrue(mockDIContainer.Object.GetDependencyMap(typeof(Monkey).GetDependencyId()).SecondaryDependencyHolders.Count == 0);
         }
 
         [TestMethod]
@@ -110,7 +110,7 @@ namespace Msfx.DI.Registrars.Tests
 
             //assert
             mockCanBeInjectableRegistrar.Verify(idr => idr.RegisterNext(It.IsAny<IEnumerable<Type>>()));
-            Assert.IsTrue(mockDIContainer.Object.GetDependencyMap(typeof(Animal).GetDependencyId()).SecondaryDependencyHolder.Count == 1);
+            Assert.IsTrue(mockDIContainer.Object.GetDependencyMap(typeof(Animal).GetDependencyId()).SecondaryDependencyHolders.Count == 1);
         }
 
         [TestMethod]
@@ -124,7 +124,7 @@ namespace Msfx.DI.Registrars.Tests
 
             //assert
             mockCanBeInjectableRegistrar.Verify(idr => idr.RegisterNext(It.IsAny<IEnumerable<Type>>()));
-            Assert.IsTrue(mockDIContainer.Object.GetDependencyMap(typeof(Animal).GetDependencyId()).SecondaryDependencyHolder.Count==2);
+            Assert.IsTrue(mockDIContainer.Object.GetDependencyMap(typeof(Animal).GetDependencyId()).SecondaryDependencyHolders.Count==2);
         }
     }
 }

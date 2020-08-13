@@ -131,6 +131,28 @@ namespace FakeTypes.For.DITests.NamespaceRecur
     }
 }
 
+namespace FakeTypes.For.AutoInjectors
+{
+    [ExcludeFromCodeCoverage]
+    public class foo
+    {
+        [AutoInject]
+        [PreferredType(typeof(bar))]
+        public bar Bar { get; set; }
+
+        public foo Foo{ get; set; }
+
+        [AutoInject]
+        public void DoFoo(foo pfoo, [PreferredType(typeof(bar))]bar pbar) { }
+    }
+
+
+    [ExcludeFromCodeCoverage]
+    public class bar
+    {
+    }
+}
+
 namespace FakeTypes.For.ActivatorInstanceFactoryTests
 {
     [ExcludeFromCodeCoverage]

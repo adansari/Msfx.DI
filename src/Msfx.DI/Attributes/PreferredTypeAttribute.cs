@@ -10,11 +10,15 @@ namespace Msfx.DI.Attributes
 
     public sealed class PreferredTypeAttribute : Attribute
     {
+        private readonly Type _type;
         public PreferredTypeAttribute(Type type)
         {
-            this.Type = type;
+            this._type = type;
         }
 
-        public Type Type { get; }
+        public Type Type
+        {
+            get { return this._type; }
+        }
     }
 }

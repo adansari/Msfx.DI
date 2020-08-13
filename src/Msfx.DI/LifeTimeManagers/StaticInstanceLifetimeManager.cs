@@ -25,7 +25,12 @@ namespace Msfx.DI.LifetimeManagers
                     if (this.Instance == null)
                     {
                         this.Instance = this.Factory.CreateInstance(this.Type, args);
-                        this.AutoInjectMembers(this.Instance);
+
+                        InstanceCreatedEventArgs arg = new InstanceCreatedEventArgs();
+                        arg.Instance = this.Instance;
+                        arg.InstanceType = this.Type;
+
+                        OnInstanceCreated(arg);
                     }
                 }
             }

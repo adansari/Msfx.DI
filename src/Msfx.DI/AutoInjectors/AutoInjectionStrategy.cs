@@ -19,6 +19,17 @@ namespace Msfx.DI.AutoInjectors
         }
 
         public abstract AutoInjector ChainAutoInjection();
+
+        public static AutoInjectionStrategy GetStrategy(AutoInjectionStrategies autoInjectionStrategy, IDIContainer container, Type type)
+        {
+            switch (autoInjectionStrategy)
+            {
+                case AutoInjectionStrategies.FMPCAutoInjection:
+                    return new FMPCAutoInjectionStrategy(container, type);
+                default:
+                    return null;
+            }
+        }
     }
 
     public class FMPCAutoInjectionStrategy : AutoInjectionStrategy
@@ -36,5 +47,11 @@ namespace Msfx.DI.AutoInjectors
                     , this._container, this._type),
                 this._container, this._type);
         }
+    }
+
+    public enum AutoInjectionStrategies
+    {
+        FMPCAutoInjection,
+        Invalid
     }
 }

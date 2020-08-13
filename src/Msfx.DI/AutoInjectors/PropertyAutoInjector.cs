@@ -1,5 +1,6 @@
 ﻿using Msfx.DI.Attributes;
 using Msfx.DI.Containers;
+using Msfx.DI.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Msfx.DI.AutoInjectors
     {
         public PropertyAutoInjector(IDIContainer container, Type type) :base(container,type){ }
 
-        public PropertyAutoInjector(AutoInjector successor, IDIContainer container, Type type) : base(container, type) { }
+        public PropertyAutoInjector(AutoInjector successor, IDIContainer container, Type type) : base(successor,container, type) { }
 
         public override void Inject(object instance)
         {
@@ -24,13 +25,22 @@ namespace Msfx.DI.AutoInjectors
             foreach (var prop in propsToAutoInject)
             {
                 PropertyInfo propInfo = (PropertyInfo)prop;
-                string dependencyId = propInfo.PropertyType.GetDependencyId();
+                string dependencyId = GetMemberPreferredDependency(propInfo) ?? propInfo.PropertyType.GetDependencyId();
 
                 if (this.Container.ContainsDependency(dependencyId))
                 {
-                    object memberValue = this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder.GetInstance(null);
+                    IDependencyHolder primaryDepHolder = this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder;
+
+                    if (primaryDepHolder == null) throw new PrimaryOrPreferredTargetDependencyNotFound("Source dependency: " + dependencyId);
+
+                    object memberValue = primaryDepHolder.GetInstance(null);
 
                     propInfo.SetValue(instance, memberValue);
+                }
+                else
+                {
+                    string errMsg = string.Format("{0} dependency not found or is not attributed as Injectable while auto injecting the property of dependency:{1}", dependencyId, this._type.GetDependencyId());
+                    throw new NonInjectableTypeException();
                 }
             }
 

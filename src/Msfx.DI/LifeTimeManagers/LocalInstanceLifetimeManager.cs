@@ -11,6 +11,12 @@ namespace Msfx.DI.LifetimeManagers
         {
             object instance = this.Factory.CreateInstance(this.Type, args);
 
+            InstanceCreatedEventArgs arg = new InstanceCreatedEventArgs();
+            arg.Instance = instance;
+            arg.InstanceType = this.Type;
+
+            OnInstanceCreated(arg);
+
             return instance;
         }
     }

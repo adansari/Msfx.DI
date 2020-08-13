@@ -1,4 +1,5 @@
 ﻿using Msfx.DI.Attributes;
+using Msfx.DI.AutoInjectors;
 using Msfx.DI.Containers;
 using Msfx.DI.Factories;
 using System;
@@ -11,11 +12,13 @@ namespace Msfx.DI.LifetimeManagers
     {
         protected Type _type;
         protected InstanceFactory _factory;
+        protected AutoInjectionStrategy _autoInjectionStrategy;
 
         protected InstanceLifetimeManager(IDIContainer container,Type type)
         {
             this._type = type;
             this._factory = InstanceFactory.GetFactory();
+            this._autoInjectionStrategy = AutoInjectionStrategy.GetStrategy(AutoInjectionStrategies.FMPCAutoInjection,container,type);
             this.Container = container;
         }
 
@@ -24,6 +27,8 @@ namespace Msfx.DI.LifetimeManagers
         public IDIContainer Container { get; }
 
         public virtual InstanceFactory Factory { get { return this._factory; } }
+
+        public virtual AutoInjectionStrategy InjectionStrategy { get { return this._autoInjectionStrategy; } }
 
         public abstract object CreateOrGetInstance(object[] args);
 
@@ -40,67 +45,9 @@ namespace Msfx.DI.LifetimeManagers
             }
         }
 
-        public void AutoInjectMembers(object instance)
+        protected virtual void OnInstanceCreated(InstanceCreatedEventArgs e)
         {
-            var membersToAutoInject = Type.GetMembers().Where(prop => Attribute.IsDefined(prop, typeof(AutoInjectAttribute)));
-
-            foreach (var member in membersToAutoInject)
-            {
-                if (member.MemberType == MemberTypes.Field)
-                {
-                    FieldInfo field = (FieldInfo)member;
-                    string dependencyId = field.FieldType.GetDependencyId();
-
-                    if (this.Container.ContainsDependency(dependencyId))
-                    {
-                        object memberValue = this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder.GetInstance(null);
-
-                        field.SetValue(instance, memberValue);
-                    }
-                }
-
-                if (member.MemberType == MemberTypes.Constructor)
-                {
-                    ConstructorInfo ctor = (ConstructorInfo)member;
-                    object[] paramValues = new object[ctor.GetParameters().Length];
-                    int index = 0;
-
-                    foreach (ParameterInfo parameter in ctor.GetParameters())
-                    {
-                        string dependencyId = parameter.ParameterType.GetDependencyId();
-
-                        if (this.Container.ContainsDependency(dependencyId))
-                        {
-                            paramValues[index] = this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder.GetInstance(null);
-
-                            index++;
-                        }
-                    }
-
-                    var o = ctor.Invoke(instance, paramValues);
-                }
-
-                if (member.MemberType == MemberTypes.Method)
-                {
-                    MethodInfo method = (MethodInfo)member;
-                    object[] paramValues = new object[method.GetParameters().Length];
-                    int index = 0;
-
-                    foreach (ParameterInfo parameter in method.GetParameters())
-                    {
-                        string dependencyId = parameter.ParameterType.GetDependencyId();
-
-                        if (this.Container.ContainsDependency(dependencyId))
-                        {
-                            paramValues[index] = this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder.GetInstance(null);
-
-                            index++;
-                        }
-                    }
-
-                    var o = method.Invoke(instance, paramValues);
-                }
-            }
+            this.InjectionStrategy.ChainAutoInjection().Inject(e.Instance);
         }
     }
 

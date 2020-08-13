@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Msfx.DI.Lab
+namespace Msfx.DI.Lab.Animals
 {
     [Injectable]
     abstract class Animal
@@ -37,7 +37,7 @@ namespace Msfx.DI.Lab
     }
 }
 
-namespace Msfx.DI.Lab.Animals
+namespace Msfx.DI.Lab.OtherAnimals
 {
     [Injectable]
     class Cat { }

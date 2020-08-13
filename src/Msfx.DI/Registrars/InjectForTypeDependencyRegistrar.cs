@@ -49,7 +49,7 @@ namespace Msfx.DI.Registrars
                             throw new InjectionAmbiguityException("More than one types(" + sourceDependencyMap.PrimaryDependencyHolder.DependencyId + ", " + this.Container[targetDependencyId].PrimaryDependencyHolder.DependencyId + ") can not be set as to be injected for " + sourceDependencyId);
                         }
 
-                        sourceDependencyMap.SecondaryDependencyHolder.Add(this.Container.GetDependencyMap(targetDependencyId).PrimaryDependencyHolder);
+                        sourceDependencyMap.SecondaryDependencyHolders.Add(this.Container.GetDependencyMap(targetDependencyId).PrimaryDependencyHolder);
                     }
                 }
             }
