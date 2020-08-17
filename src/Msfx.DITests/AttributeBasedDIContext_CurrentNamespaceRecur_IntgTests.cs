@@ -18,7 +18,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespaceRecur_Class_Injection_Ctor_With_Param()
+        public void CurrentNamespaceRecur_Class_Injection_Ctor_With_Param_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -32,7 +32,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespaceRecur_Class_Injection()
+        public void CurrentNamespaceRecur_Class_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -43,8 +43,9 @@ namespace Msfx.DI.Tests
             //assert
             Assert.IsInstanceOfType(dog, typeof(Dog));
         }
+
         [TestMethod]
-        public void CurrentNamespaceRecur_Abstract_Class_Injection()
+        public void CurrentNamespaceRecur_Abstract_Class_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -57,7 +58,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespaceRecur_Interface_Injection()
+        public void CurrentNamespaceRecur_Interface_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -70,7 +71,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespaceRecur_Abstract_Class_Target_Injection()
+        public void CurrentNamespaceRecur_Abstract_Class_Target_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -83,7 +84,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespaceRecur_Interface_Target_Injection()
+        public void CurrentNamespaceRecur_Interface_Target_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();

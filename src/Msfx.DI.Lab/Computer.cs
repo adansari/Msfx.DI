@@ -14,7 +14,7 @@ namespace Msfx.DI.Lab
     }
 
     [Injectable]
-    [InjectForType(typeof(Processor))]
+    [InjectFor(typeof(Processor))]
     public class Intel : Processor
     {
         public override void Compute()
@@ -44,7 +44,7 @@ namespace Msfx.DI.Lab
     public class CRTMonitor : Display
     {
         [AutoInject]
-        [PreferredType(typeof(CRTMonitorPanel))]
+        [Inject(typeof(CRTMonitorPanel))]
         public override Panel Panel { get; set; }
         public override void Print()
         {
@@ -54,7 +54,7 @@ namespace Msfx.DI.Lab
 
 
     [Injectable]
-    [InjectForType(typeof(Display))]
+    [InjectFor(typeof(Display))]
     public class LCDMonitor : Display
     {
         [AutoInject]
@@ -81,7 +81,7 @@ namespace Msfx.DI.Lab
     }
 
     [Injectable]
-    [InjectForType(typeof(Panel))]
+    [InjectFor(typeof(Panel))]
     public class LCDMonitorPanel : Panel
     {
         public override void Contorl()
@@ -91,26 +91,72 @@ namespace Msfx.DI.Lab
     }
 
     [Injectable]
+    public class RAM
+    {
+        protected RAM() { }
+
+        protected int _sizeInGB;
+        public RAM(int sizeInGB) { this._sizeInGB = sizeInGB; }
+
+        public virtual void GetSize()
+        {
+            Console.WriteLine(_sizeInGB + " GB");
+        }
+    }
+
+    [Injectable]
+    public class DDRRAM : RAM
+    {
+        protected DDRRAM() { }
+        public DDRRAM(int sizeInGB) : base(sizeInGB) { }
+
+        public override void GetSize()
+        {
+            Console.WriteLine(_sizeInGB + " GB - DDR");
+        }
+    }
+
+    [Injectable]
     public abstract class Computer
     {
         public virtual Display Display { get; set; }
         public virtual Processor Processor {get;set;}
+        public virtual RAM RAM { get; set; }
+
         public abstract void Operate();
     }
 
     [Injectable]
     public class Desktop : Computer
     {
-        [AutoInject]
-        [PreferredType(typeof(CRTMonitor))]
-        public override Display Display { get; set; }
+        private Display _display;
 
         [AutoInject]
-        [PreferredType(typeof(AMD))]
+        [Inject(typeof(CRTMonitor))]
+        public override Display Display
+        {
+            get
+            {
+                return this._display;
+            }
+            set
+            {
+                this._display = value;
+            }
+        }
+
+        [AutoInject]
+        [Inject(typeof(AMD))]
         public override Processor Processor { get; set; }
+
+        [AutoInject]
+        [InjectValue(8)]
+        public override RAM RAM { get;set; }
         public override void Operate()
         {
             Console.WriteLine("Desktop operataing");
+
+            this.RAM.GetSize();
 
             Processor.Compute();
 
@@ -126,14 +172,18 @@ namespace Msfx.DI.Lab
         public Laptop() { }
 
         [AutoInject]
-        public Laptop([PreferredType(typeof(CRTMonitor))]Display display)
+        public Laptop([Inject(typeof(CRTMonitor))]Display display)
         {
             this.Display = display;
         }
 
+        [AutoInject]
+        [InjectValue(16)]
+        [Inject(typeof(DDRRAM))]
+        public override RAM RAM { get; set; }
 
         [AutoInject]
-        public void SetProcessor([PreferredType(typeof(AMD))]Processor processor)
+        public void SetProcessor([Inject(typeof(AMD))]Processor processor)
         {
             this.Processor = processor;
         }
@@ -141,6 +191,8 @@ namespace Msfx.DI.Lab
         public override void Operate()
         {
             Console.WriteLine("Laptop operataing");
+
+            this.RAM.GetSize();
 
             Processor.Compute();
 

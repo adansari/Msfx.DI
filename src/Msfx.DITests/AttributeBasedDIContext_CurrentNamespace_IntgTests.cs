@@ -17,7 +17,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespace_Class_Injection()
+        public void CurrentNamespace_Class_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -30,7 +30,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespace_Abstract_Class_Injection()
+        public void CurrentNamespace_Abstract_Class_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -43,7 +43,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespace_Interface_Injection()
+        public void CurrentNamespace_Interface_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -56,7 +56,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespace_Abstract_Class_Target_Injection()
+        public void CurrentNamespace_Abstract_Class_Target_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -69,7 +69,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespace_Interface_Target_Injection()
+        public void CurrentNamespace_Interface_Target_Injection_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -82,7 +82,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespace_Class_Injection_Static_Type()
+        public void CurrentNamespace_Class_Injection_Static_Type_IntgTests()
         {
             //arrange
             diCtx.Scan();
@@ -98,7 +98,7 @@ namespace Msfx.DI.Tests
         }
 
         [TestMethod]
-        public void CurrentNamespace_Class_Injection_Local_Type()
+        public void CurrentNamespace_Class_Injection_Local_Type_IntgTests()
         {
             //arrange
             diCtx.Scan();

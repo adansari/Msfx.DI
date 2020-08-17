@@ -70,7 +70,7 @@ namespace FakeTypes.For.DITests
 
     [ExcludeFromCodeCoverage]
     [Injectable]
-    [InjectForType(typeof(IMammal))]
+    [InjectFor(typeof(IMammal))]
     [CanBeInjectedFor(typeof(IMammal))]
     [CanBeInjectedFor(typeof(Animal))]
     public class Cat : Animal, IMammal
@@ -82,7 +82,7 @@ namespace FakeTypes.For.DITests
 
     [ExcludeFromCodeCoverage]
     [Injectable]
-    [InjectForType(typeof(Animal))]
+    [InjectFor(typeof(Animal))]
     [CanBeInjectedFor(typeof(IMammal))]
     public class Dog : Animal, IMammal
     {
@@ -109,7 +109,7 @@ namespace FakeTypes.For.DITests.NamespaceRecur
 
     [ExcludeFromCodeCoverage]
     [Injectable]
-    [InjectForType(typeof(IMammal))]
+    [InjectFor(typeof(IMammal))]
     [CanBeInjectedFor(typeof(IMammal))]
     [CanBeInjectedFor(typeof(Animal))]
     public class Cat : Animal, IMammal
@@ -121,7 +121,7 @@ namespace FakeTypes.For.DITests.NamespaceRecur
 
     [ExcludeFromCodeCoverage]
     [Injectable]
-    [InjectForType(typeof(Animal))]
+    [InjectFor(typeof(Animal))]
     [CanBeInjectedFor(typeof(IMammal))]
     public class Dog : Animal, IMammal
     {
@@ -136,20 +136,168 @@ namespace FakeTypes.For.AutoInjectors
     [ExcludeFromCodeCoverage]
     public class foo
     {
-        [AutoInject]
-        [PreferredType(typeof(bar))]
-        public bar Bar { get; set; }
-
-        public foo Foo{ get; set; }
+        private bar _bar,_pbar;
 
         [AutoInject]
-        public void DoFoo(foo pfoo, [PreferredType(typeof(bar))]bar pbar) { }
+        public bar FieldBar;
+
+        [AutoInject]
+        [Inject(typeof(bar))]
+        public bar PropBar { get; set; }
+
+        public foo PropFoo{ get; set; }
+
+        [InjectValue(20)]
+        public pow PropPow { get; set; }
+
+        public foo() { }
+
+        [AutoInject]
+        public foo(bar bar)
+        {
+            this._bar = bar;
+        }
+        
+        public void DoFoo(foo pfoo, [Inject(typeof(bar))]bar pbar) { }
+
+        public void DoPow([InjectValue(10)]pow bow) { }
+
+
+        [AutoInject]
+        public void DoBar(bar pbar) { this._pbar = pbar; }
+
+        public bar Get_bar() { return this._bar; }
+
+        public bar Get_pbar() { return this._pbar; }
     }
-
 
     [ExcludeFromCodeCoverage]
     public class bar
     {
+    }
+
+    [ExcludeFromCodeCoverage]
+    public class pow
+    {
+        public pow(int intVal){}
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public abstract class Processor
+    {
+        public abstract void Compute();
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public class Intel: Processor
+    {
+        public override void Compute() { }
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public class AMD : Processor
+    {
+        public override void Compute() { }
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public class RAM
+    {
+        protected RAM() { }
+
+        protected int _sizeInGB;
+        public RAM(int sizeInGB) { this._sizeInGB = sizeInGB; }
+
+        public int Size { get { return this._sizeInGB; } }
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public class DDRRAM:RAM
+    {
+        protected DDRRAM() { }
+        public DDRRAM(int sizeInGB) : base(sizeInGB) { }
+
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public abstract class Computer
+    {
+        protected Processor _processor;
+
+        protected RAM _ram;
+        public abstract void Operate();
+
+        public Processor Processor { get { return this._processor; } }
+        public RAM RAM { get { return this._ram; } }
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public class Desktop:Computer
+    {
+        // A private or protected ctor is a must for dependency injection
+        protected Desktop(){}
+
+        [AutoInject]
+        public Desktop(
+            [Inject(typeof(DDRRAM))]
+            [InjectValue(8)]
+            RAM ram)
+        {
+            this._ram = ram;
+        }
+
+        [AutoInject]
+        public void SetProcessor([Inject(typeof(AMD))]Processor processor)
+        {
+            this._processor = processor;
+        }
+        public override void Operate(){}
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public class Laptop : Computer
+    {
+        // A private or protected ctor is a must for dependency injection
+        protected Laptop() { }
+
+        [AutoInject]
+        [InjectValue(8)]
+        public RAM AnotherRAM;
+         
+        [AutoInject]
+        [Inject(typeof(DDRRAM))]
+        [InjectValue(16)]
+        public RAM SetRAM { set { this._ram = value; } }
+
+        public override void Operate() { }
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public class One { }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public class Two
+    {
+        [AutoInject]
+        public One One;
+    }
+
+    [ExcludeFromCodeCoverage]
+    [Injectable]
+    public class Three
+    {
+        [AutoInject]
+        public Two Two;
     }
 }
 
@@ -273,7 +421,7 @@ namespace FakeTypes.For.InjectForTypeDependencyRegistrarTests
     }
 
     [ExcludeFromCodeCoverage]
-    [InjectForType(typeof(Animal))]
+    [InjectFor(typeof(Animal))]
     public class Donkey : Animal
     {
         public override void Sound()
@@ -283,7 +431,7 @@ namespace FakeTypes.For.InjectForTypeDependencyRegistrarTests
     }
 
     [ExcludeFromCodeCoverage]
-    [InjectForType(typeof(Monkey))]
+    [InjectFor(typeof(Monkey))]
     public class Monkey : Animal
     {
         public override void Sound()
@@ -293,7 +441,7 @@ namespace FakeTypes.For.InjectForTypeDependencyRegistrarTests
     }
 
     [ExcludeFromCodeCoverage]
-    [InjectForType(typeof(Animal))]
+    [InjectFor(typeof(Animal))]
     public class Dog : Animal
     {
         public override void Sound()

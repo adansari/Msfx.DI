@@ -22,7 +22,7 @@ namespace Msfx.DI.AutoInjectors.Tests
             FMPCAutoInjectionStrategy fMPCAutoInjection = new FMPCAutoInjectionStrategy(It.IsAny<IDIContainer>(),It.IsAny<Type>());
 
             //act
-            AutoInjector autoInjector = fMPCAutoInjection.ChainAutoInjection();
+            MemberAutoInjector autoInjector = fMPCAutoInjection.ChainAutoInjectors();
 
 
             //assert

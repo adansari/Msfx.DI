@@ -71,9 +71,13 @@
     <Compile Include="AttributeBasedDIContextTests.cs" />
     <Compile Include="AttributeBasedDIContext_CurrentNamespaceRecur_IntgTests.cs" />
     <Compile Include="AutoInjectors\AutoInjectionStrategyTests.cs" />
-    <Compile Include="AutoInjectors\AutoInjectorTests.cs" />
+    <Compile Include="AutoInjectors\ConstructorAutoInjectorTests.cs" />
+    <Compile Include="AutoInjectors\CFPMAutoInjectionStrategyTests.cs" />
+    <Compile Include="AutoInjectors\MemberAutoInjectorTests.cs" />
     <Compile Include="AutoInjectors\FMPCAutoInjectionStrategyTests.cs" />
+    <Compile Include="AutoInjectors\MethodAutoInjectorTests.cs" />
     <Compile Include="AutoInjectors\PropertyAutoInjectorTests.cs" />
+    <Compile Include="AutoInjectors\PublicFieldAutoInjectorTests.cs" />
     <Compile Include="Container\ConcurrentDictDIContainerTests.cs" />
     <Compile Include="DependencyHolderTests.cs" />
     <Compile Include="DependencyMapTests.cs" />
@@ -93,6 +97,7 @@
     <Compile Include="Scanners\AssemblyScannerTests.cs" />
     <Compile Include="Scanners\NamespaceRecursiveScannerTests.cs" />
     <Compile Include="Scanners\NamespaceScannerTests.cs" />
+    <Compile Include="AutoInjectors_IntgTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

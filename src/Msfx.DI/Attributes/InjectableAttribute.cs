@@ -11,8 +11,5 @@ namespace Msfx.DI.Attributes
     public sealed class InjectableAttribute : Attribute
     {
         public InstanceType InstanceType { get; set; } = InstanceType.Static;
-
-        public bool IsAutoInjectionRequired { get; set; } = false;
-
     }
 }

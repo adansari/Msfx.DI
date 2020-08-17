@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace Msfx.DI.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-    public sealed class CanBeInjectedForAttribute : Attribute
+    public sealed class InjectForAttribute : Attribute
     {
-        readonly Type _sourceType;
+        private readonly Type _type;
 
-        public CanBeInjectedForAttribute(Type sourceType)
+        public InjectForAttribute(Type type)
         {
-            this._sourceType = sourceType;
+            this._type = type;
         }
 
-        public Type SourceType
+        public Type Type
         {
-            get { return this._sourceType; }
+            get { return this._type; }
         }
     }
 }

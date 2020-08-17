@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Msfx.DI.AutoInjectors
 {
-    public class PropertyAutoInjector : AutoInjector
+    public class PropertyAutoInjector : MemberAutoInjector
     {
         public PropertyAutoInjector(IDIContainer container, Type type) :base(container,type){ }
 
-        public PropertyAutoInjector(AutoInjector successor, IDIContainer container, Type type) : base(successor,container, type) { }
+        public PropertyAutoInjector(MemberAutoInjector successor, IDIContainer container, Type type) : base(successor,container, type) { }
 
         public override void Inject(object instance)
         {
@@ -25,7 +25,7 @@ namespace Msfx.DI.AutoInjectors
             foreach (var prop in propsToAutoInject)
             {
                 PropertyInfo propInfo = (PropertyInfo)prop;
-                string dependencyId = GetMemberPreferredDependency(propInfo) ?? propInfo.PropertyType.GetDependencyId();
+                string dependencyId = GetMemberInjectDependency(propInfo) ?? propInfo.PropertyType.GetDependencyId();
 
                 if (this.Container.ContainsDependency(dependencyId))
                 {
@@ -33,14 +33,14 @@ namespace Msfx.DI.AutoInjectors
 
                     if (primaryDepHolder == null) throw new PrimaryOrPreferredTargetDependencyNotFound("Source dependency: " + dependencyId);
 
-                    object memberValue = primaryDepHolder.GetInstance(null);
+                    object memberValue = primaryDepHolder.GetInstance(GetMemberInjectValues(propInfo));
 
                     propInfo.SetValue(instance, memberValue);
                 }
                 else
                 {
-                    string errMsg = string.Format("{0} dependency not found or is not attributed as Injectable while auto injecting the property of dependency:{1}", dependencyId, this._type.GetDependencyId());
-                    throw new NonInjectableTypeException();
+                    string errMsg = string.Format("{0} dependency not found or is not attributed as Injectable while auto injecting the property '{1}' of dependency: {2}", dependencyId, propInfo.Name,this._type.GetDependencyId());
+                    throw new NonInjectableTypeException(errMsg);
                 }
             }
 

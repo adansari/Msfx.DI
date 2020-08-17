@@ -1,21 +1,27 @@
 ﻿using FakeTypes.For.AutoInjectors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Msfx.DI.AutoInjectors;
 using Msfx.DI.Containers;
 using Msfx.DI.Exceptions;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Msfx.DI.AutoInjectors.Tests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class PropertyAutoInjectorTests
-    { 
+    public class MethodAutoInjectorTests
+    {
         [TestMethod]
-        public void PropertyAutoInjector_Inject_Test()
+        public void MethodAutoInjector_Inject_Test()
         {
-            //arrange
+            // arrange
             Mock<IDependencyHolder> mockDependencyHolder = new Mock<IDependencyHolder>();
             mockDependencyHolder.Setup(dh => dh.GetInstance(null)).Returns(new bar());
 
@@ -26,24 +32,23 @@ namespace Msfx.DI.AutoInjectors.Tests
             mockContainer.Setup(c => c.ContainsDependency(It.IsAny<string>())).Returns(true);
             mockContainer.Setup(c => c.GetDependencyMap(It.IsAny<string>())).Returns(mockDependencyMap.Object);
 
-            Mock<PropertyAutoInjector> mockPropertyAutoInjector = new Mock<PropertyAutoInjector>(mockContainer.Object,typeof(foo)) { CallBase = true };
-            mockPropertyAutoInjector.Setup(pa => pa.GetMemberInjectDependency(It.IsAny<MemberInfo>())).Returns((string)null);
+            Mock<MethodAutoInjector> mockMethodAutoInjector = new Mock<MethodAutoInjector>(mockContainer.Object, typeof(foo)) { CallBase = true };
+            mockMethodAutoInjector.Setup(pa => pa.GetParamInjectDependency(It.IsAny<ParameterInfo>())).Returns((string)null);
 
             foo afoo = new foo();
 
             //act
-            mockPropertyAutoInjector.Object.Inject(afoo);
-
+            mockMethodAutoInjector.Object.Inject(afoo);
 
             //assert
-            Assert.IsNotNull(afoo.PropBar);
+            Assert.IsNotNull(afoo.Get_pbar());
         }
 
         [TestMethod]
         [ExpectedException(typeof(PrimaryOrPreferredTargetDependencyNotFound))]
-        public void PropertyAutoInjector_Inject_PrimaryOrPreferredTargetDependencyNotFound_Test()
+        public void MethodAutoInjector_Inject_PrimaryOrPreferredTargetDependencyNotFound_Test()
         {
-            //arrange
+            // arrange
             Mock<IDependencyMap> mockDependencyMap = new Mock<IDependencyMap>();
             mockDependencyMap.Setup(dm => dm.PrimaryDependencyHolder).Returns((IDependencyHolder)null);
 
@@ -51,38 +56,37 @@ namespace Msfx.DI.AutoInjectors.Tests
             mockContainer.Setup(c => c.ContainsDependency(It.IsAny<string>())).Returns(true);
             mockContainer.Setup(c => c.GetDependencyMap(It.IsAny<string>())).Returns(mockDependencyMap.Object);
 
-            Mock<PropertyAutoInjector> mockPropertyAutoInjector = new Mock<PropertyAutoInjector>(mockContainer.Object, typeof(foo)) { CallBase = true };
-            mockPropertyAutoInjector.Setup(pa => pa.GetMemberInjectDependency(It.IsAny<MemberInfo>())).Returns((string)null);
+            Mock<MethodAutoInjector> mockMethodAutoInjector = new Mock<MethodAutoInjector>(mockContainer.Object, typeof(foo)) { CallBase = true };
+            mockMethodAutoInjector.Setup(pa => pa.GetParamInjectDependency(It.IsAny<ParameterInfo>())).Returns((string)null);
 
             foo afoo = new foo();
 
             //act
-            mockPropertyAutoInjector.Object.Inject(afoo);
-
+            mockMethodAutoInjector.Object.Inject(afoo);
 
             //assert
-            Assert.IsNull(afoo.PropBar);
+            Assert.IsNull(afoo.Get_bar());
         }
+
 
         [TestMethod]
         [ExpectedException(typeof(NonInjectableTypeException))]
-        public void PropertyAutoInjector_Inject_NonInjectableTypeException_Test()
+        public void MethodAutoInjector_NonInjectableTypeException_Test()
         {
-            //arrange
+            // arrange
             Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
             mockContainer.Setup(c => c.ContainsDependency(It.IsAny<string>())).Returns(false);
 
-            Mock<PropertyAutoInjector> mockPropertyAutoInjector = new Mock<PropertyAutoInjector>(mockContainer.Object, typeof(foo)) { CallBase = true };
-            mockPropertyAutoInjector.Setup(pa => pa.GetMemberInjectDependency(It.IsAny<MemberInfo>())).Returns((string)null);
+            Mock<MethodAutoInjector> mockMethodAutoInjector = new Mock<MethodAutoInjector>(mockContainer.Object, typeof(foo)) { CallBase = true };
+            mockMethodAutoInjector.Setup(pa => pa.GetParamInjectDependency(It.IsAny<ParameterInfo>())).Returns((string)null);
 
             foo afoo = new foo();
 
             //act
-            mockPropertyAutoInjector.Object.Inject(afoo);
-
+            mockMethodAutoInjector.Object.Inject(afoo);
 
             //assert
-            Assert.IsNull(afoo.PropBar);
+            Assert.IsNull(afoo.Get_bar());
         }
     }
 }

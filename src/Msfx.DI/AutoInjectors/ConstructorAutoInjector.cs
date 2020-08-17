@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Msfx.DI.AutoInjectors
 {
-    public class ConstructorAutoInjector : AutoInjector
+    public class ConstructorAutoInjector : MemberAutoInjector
     {
         public ConstructorAutoInjector(IDIContainer container, Type type) :base(container,type){ }
 
-        public ConstructorAutoInjector(AutoInjector successor, IDIContainer container, Type type) : base(successor, container, type) { }
+        public ConstructorAutoInjector(MemberAutoInjector successor, IDIContainer container, Type type) : base(successor, container, type) { }
 
         public override void Inject(object instance)
         {
@@ -28,9 +28,9 @@ namespace Msfx.DI.AutoInjectors
                 object[] paramValues = new object[ctorInfo.GetParameters().Length];
                 int index = 0;
 
-                foreach (ParameterInfo parameter in ctorInfo.GetParameters())
+                foreach (ParameterInfo paramInfo in ctorInfo.GetParameters())
                 {
-                    string dependencyId = GetParamPreferredDependency(parameter) ?? parameter.ParameterType.GetDependencyId();
+                    string dependencyId = GetParamInjectDependency(paramInfo) ?? paramInfo.ParameterType.GetDependencyId();
 
                     if (this.Container.ContainsDependency(dependencyId))
                     {
@@ -38,7 +38,7 @@ namespace Msfx.DI.AutoInjectors
 
                         if (primaryDepHolder == null) throw new PrimaryOrPreferredTargetDependencyNotFound("Source dependency: " + dependencyId);
 
-                        object memberValue = primaryDepHolder.GetInstance(null);
+                        object memberValue = primaryDepHolder.GetInstance(GetParamInjectValues(paramInfo));
 
                         paramValues[index] = memberValue;
 
@@ -46,8 +46,8 @@ namespace Msfx.DI.AutoInjectors
                     }
                     else
                     {
-                        string errMsg = string.Format("{0} dependency not found or is not attributed as Injectable while auto injecting the constructor of dependency:{1}", dependencyId,this._type.GetDependencyId());
-                        throw new NonInjectableTypeException();
+                        string errMsg = string.Format("{0} dependency not found or is not attributed as Injectable while auto injecting the parameter '{1}' of one of constructor of dependency: {2}", dependencyId, paramInfo ,this._type.GetDependencyId());
+                        throw new NonInjectableTypeException(errMsg);
                     }
                 }
 

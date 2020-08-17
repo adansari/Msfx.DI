@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Msfx.DI.AutoInjectors
 {
-    public class PublicFieldAutoInjector : AutoInjector
+    public class PublicFieldAutoInjector : MemberAutoInjector
     {
         public PublicFieldAutoInjector(IDIContainer container, Type type) : base(container, type) { }
 
-        public PublicFieldAutoInjector(AutoInjector successor, IDIContainer container, Type type) : base(successor,container, type) { }
+        public PublicFieldAutoInjector(MemberAutoInjector successor, IDIContainer container, Type type) : base(successor,container, type) { }
 
         public override void Inject(object instance)
         {
@@ -25,7 +25,7 @@ namespace Msfx.DI.AutoInjectors
             foreach (var field in fieldsToAutoInject)
             {
                 FieldInfo fieldInfo = (FieldInfo)field;
-                string dependencyId = GetMemberPreferredDependency(fieldInfo) ?? fieldInfo.FieldType.GetDependencyId();
+                string dependencyId = GetMemberInjectDependency(fieldInfo) ?? fieldInfo.FieldType.GetDependencyId();
 
                 if (this.Container.ContainsDependency(dependencyId))
                 {
@@ -33,9 +33,14 @@ namespace Msfx.DI.AutoInjectors
 
                     if (primaryDepHolder == null) throw new PrimaryOrPreferredTargetDependencyNotFound("Source dependency: " + dependencyId);
 
-                    object memberValue = primaryDepHolder.GetInstance(null);
+                    object memberValue = primaryDepHolder.GetInstance(GetMemberInjectValues(fieldInfo));
 
                     fieldInfo.SetValue(instance, memberValue);
+                }
+                else
+                {
+                    string errMsg = string.Format("{0} dependency not found or is not attributed as Injectable while auto injecting the field '{1}' of dependency: {2}", dependencyId, fieldInfo.Name ,this._type.GetDependencyId());
+                    throw new NonInjectableTypeException(errMsg);
                 }
             }
 

@@ -47,7 +47,7 @@ namespace Msfx.DI.LifetimeManagers
 
         protected virtual void OnInstanceCreated(InstanceCreatedEventArgs e)
         {
-            this.InjectionStrategy.ChainAutoInjection().Inject(e.Instance);
+            this.InjectionStrategy.ChainAutoInjectors().Inject(e.Instance);
         }
     }
 

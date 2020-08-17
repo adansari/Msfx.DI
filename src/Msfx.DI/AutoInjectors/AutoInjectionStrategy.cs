@@ -18,7 +18,7 @@ namespace Msfx.DI.AutoInjectors
             this._type = type;
         }
 
-        public abstract AutoInjector ChainAutoInjection();
+        public abstract MemberAutoInjector ChainAutoInjectors();
 
         public static AutoInjectionStrategy GetStrategy(AutoInjectionStrategies autoInjectionStrategy, IDIContainer container, Type type)
         {
@@ -26,6 +26,8 @@ namespace Msfx.DI.AutoInjectors
             {
                 case AutoInjectionStrategies.FMPCAutoInjection:
                     return new FMPCAutoInjectionStrategy(container, type);
+                case AutoInjectionStrategies.CFPMAutoInjection:
+                    return new CFPMAutoInjectionStrategy(container, type);
                 default:
                     return null;
             }
@@ -36,7 +38,7 @@ namespace Msfx.DI.AutoInjectors
     {
         public FMPCAutoInjectionStrategy(IDIContainer container, Type type) : base(container, type) { }
 
-        public override AutoInjector ChainAutoInjection()
+        public override MemberAutoInjector ChainAutoInjectors()
         {
             return 
                 new PublicFieldAutoInjector(
@@ -49,9 +51,29 @@ namespace Msfx.DI.AutoInjectors
         }
     }
 
+    public class CFPMAutoInjectionStrategy : AutoInjectionStrategy
+    {
+        public CFPMAutoInjectionStrategy(IDIContainer container, Type type) : base(container, type) { }
+
+        public override MemberAutoInjector ChainAutoInjectors()
+        {
+            return
+                new ConstructorAutoInjector(
+                    new PublicFieldAutoInjector(
+                        new PropertyAutoInjector(
+                            new MethodAutoInjector(this._container, this._type)
+                        , this._container, this._type)
+                    , this._container, this._type),
+                this._container, this._type);
+        }
+    }
+
     public enum AutoInjectionStrategies
     {
+        //Sequence of autoinjection => Field => Method => Property => Ctor  
         FMPCAutoInjection,
+        //Sequence of autoinjection => Ctor => Field => Property => Method 
+        CFPMAutoInjection,
         Invalid
     }
 }

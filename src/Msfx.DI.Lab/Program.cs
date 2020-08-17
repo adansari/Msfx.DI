@@ -5,26 +5,34 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Msfx.DI.Attributes;
-using Msfx.DI.Lab.Levels;
 
 namespace Msfx.DI.Lab
 {
+    [Injectable]
+    public abstract class Animal
+    {
+        public abstract void MakeSound();
+    }
+
+    [Injectable]
+    public class Cat : Animal
+    {
+        public override void MakeSound()
+        {
+            Console.WriteLine("Meowwww");
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
             DIContext di = new AttributeBasedDIContext(typeof(Program)).Scan();
 
-            Computer desktop = di.Inject<Desktop>();
+            Animal cat = di.Inject<Cat>();
+            cat.MakeSound();
 
-            desktop.Operate();
-
-
-            Computer Laptop = di.Inject<Laptop>();
-
-            Laptop.Operate();
-
-            Console.Read();
+            Console.ReadLine();
         }
     }
 }

@@ -19,14 +19,16 @@ namespace Msfx.DI.AutoInjectors.Tests
         public void AutoInjectionStrategy_GetStrategy_Test()
         {
             //arrange
-            AutoInjectionStrategy autoInjectionStrategy, invalidAutoInjectionStrategy;
+            AutoInjectionStrategy fmpcAutoInjectionStrategy, cfpmAutoInjectionStrategy, invalidAutoInjectionStrategy;
 
             //act
-            autoInjectionStrategy = AutoInjectionStrategy.GetStrategy(AutoInjectionStrategies.FMPCAutoInjection,It.IsAny<IDIContainer>(),It.IsAny<Type>());
+            fmpcAutoInjectionStrategy = AutoInjectionStrategy.GetStrategy(AutoInjectionStrategies.FMPCAutoInjection,It.IsAny<IDIContainer>(),It.IsAny<Type>());
+            cfpmAutoInjectionStrategy = AutoInjectionStrategy.GetStrategy(AutoInjectionStrategies.CFPMAutoInjection, It.IsAny<IDIContainer>(), It.IsAny<Type>());
             invalidAutoInjectionStrategy = AutoInjectionStrategy.GetStrategy(AutoInjectionStrategies.Invalid, It.IsAny<IDIContainer>(), It.IsAny<Type>());
 
             //assert
-            Assert.IsInstanceOfType(autoInjectionStrategy, typeof(FMPCAutoInjectionStrategy));
+            Assert.IsInstanceOfType(fmpcAutoInjectionStrategy, typeof(FMPCAutoInjectionStrategy));
+            Assert.IsInstanceOfType(cfpmAutoInjectionStrategy, typeof(CFPMAutoInjectionStrategy));
             Assert.IsNull(invalidAutoInjectionStrategy);
         }
     }

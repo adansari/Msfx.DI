@@ -19,13 +19,13 @@ namespace Msfx.DI.Registrars
         {
             foreach (Type t in types)
             {
-                if (Attribute.IsDefined(t, typeof(InjectForTypeAttribute)))
+                if (Attribute.IsDefined(t, typeof(InjectForAttribute)))
                 {
-                    Attribute[] injectForTypeAttributes = Attribute.GetCustomAttributes(t, typeof(InjectForTypeAttribute));
+                    Attribute[] injectForTypeAttributes = Attribute.GetCustomAttributes(t, typeof(InjectForAttribute));
 
                     foreach (Attribute eachAttribute in injectForTypeAttributes)
                     {
-                        InjectForTypeAttribute injectForType = eachAttribute as InjectForTypeAttribute;
+                        InjectForAttribute injectForType = eachAttribute as InjectForAttribute;
 
                         string sourceDependencyId = injectForType.Type.GetDependencyId();
                         string targetDependencyId = t.GetDependencyId();

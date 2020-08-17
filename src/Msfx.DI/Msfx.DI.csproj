@@ -46,9 +46,10 @@
     <Compile Include="AttributeBasedDIContext.cs" />
     <Compile Include="Attributes\AutoInjectAttribute.cs" />
     <Compile Include="Attributes\CanBeInjectedForAttribute.cs" />
-    <Compile Include="Attributes\InjectForTypeAttribute.cs" />
-    <Compile Include="Attributes\PreferredTypeAttribute.cs" />
-    <Compile Include="AutoInjectors\AutoInjector.cs" />
+    <Compile Include="Attributes\InjectForAttribute.cs" />
+    <Compile Include="Attributes\InjectValueAttribute.cs" />
+    <Compile Include="Attributes\InjectAttribute.cs" />
+    <Compile Include="AutoInjectors\MemberAutoInjector.cs" />
     <Compile Include="AutoInjectors\AutoInjectionStrategy.cs" />
     <Compile Include="AutoInjectors\ConstructorAutoInjector.cs" />
     <Compile Include="AutoInjectors\MethodAutoInjector.cs" />
