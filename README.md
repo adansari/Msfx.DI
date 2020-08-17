@@ -1,5 +1,5 @@
 # Msfx.DI
-It is a very basic .net dependency injection framework allow developers to write loosely coupled components.
+Very basic .net dependency injection framework allow developers to write loosely coupled components.
 ## Features
 - **No** default injection 
 - Lightweight, fast and zero boilerplat required
