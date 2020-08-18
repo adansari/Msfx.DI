@@ -11,10 +11,10 @@ Very basic .net dependency injection framework allow developers to write loosely
 - Higly flexible and extensible design
 
 ## Status
-***Under review*** - For review, please clone the repo and use the `Mxfx.DI.Lab` project to get your hand dirty
+***Under review*** - For review, please clone the repo and use the `Mxfx.DI.Lab` project to get your hand dirty. Do share your feedback and suggestion for improvement and next step.
 
 ## Getting Started
-Get started with Msfx.DI Lab and play around it. Do share your feedback and suggestion for improvement and next step.
+Lets get started with very basic example. 
 
 ```csharp
 [Injectable]
