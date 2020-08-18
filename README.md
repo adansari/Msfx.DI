@@ -44,7 +44,7 @@ class Program
         DIContext di = new AttributeBasedDIContext(typeof(Program)).Scan();
 
         Animal cat = di.Inject<Cat>();
-        cat.MakeSound();
+        cat.MakeSound();//  Output =>  Meowwww
     }
 }
 ```
