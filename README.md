@@ -35,7 +35,7 @@ public class Cat : Animal
     }
 }
 ```
-Now, a class implementing the `Animal` abtract class.
+Now, a class `Cat` implementing the `Animal` abtract class.
 
 ```csharp
 class Program
