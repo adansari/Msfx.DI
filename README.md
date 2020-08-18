@@ -48,5 +48,5 @@ Now, a class implementing the `Animal` abtract class.
         }
     }
 ```
-Finally, creating the `DIContext` by passing any Type from current namespace to scan the current namespace for dependency registration.
+Finally, creating the `DIContext` by passing the Type `Program` from current namespace to scan the same for dependency registration.
 
