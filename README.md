@@ -17,36 +17,36 @@ Very basic .net dependency injection framework allow developers to write loosely
 Get started with Msfx.DI Lab and play around it. Do share your feedback and suggestion for improvement and next step.
 
 ```csharp
-    [Injectable]
-    public abstract class Animal
-    {
-        public abstract void MakeSound();
-    }
+[Injectable]
+public abstract class Animal
+{
+    public abstract void MakeSound();
+}
 ```
 An abstract class attributed as `Injectable` - it is must to have this attibute to make type as injectable.
 ```csharp
-    [Injectable]
-    public class Cat : Animal
+[Injectable]
+public class Cat : Animal
+{
+    public override void MakeSound()
     {
-        public override void MakeSound()
-        {
-            Console.WriteLine("Meowwww");
-        }
+        Console.WriteLine("Meowwww");
     }
+}
 ```
 Now, a class implementing the `Animal` abtract class.
 
 ```csharp
-    class Program
+class Program
+{
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            DIContext di = new AttributeBasedDIContext(typeof(Program)).Scan();
+        DIContext di = new AttributeBasedDIContext(typeof(Program)).Scan();
 
-            Animal cat = di.Inject<Cat>();
-            cat.MakeSound();
-        }
+        Animal cat = di.Inject<Cat>();
+        cat.MakeSound();
     }
+}
 ```
 Finally, creating the `DIContext` by passing the Type `Program` from current namespace to scan the same for dependency registration.
 
