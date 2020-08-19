@@ -121,14 +121,14 @@ AMD Processor
 Windows operating...
 ```
 Couple of points to note:
-- Currently is support only Static and Non-Static i.e. local instance types, by default a Static instance is created unless specified `[Injectable(InstanceType = InstanceType.Local)]`
+- Currently only Static and Non-Static i.e. local instance types are supported, by default static instance is created unless specified as `[Injectable(InstanceType = InstanceType.Local)]`
 - You need to mark attribute `[AutoInject]` for Constructor, Method, Property and Field auto wiring.
-- You a do an explicit injection for Constructor/Method Parameters, Property and Field by using the attribute `[Inject(typeof(..))]` i.e. `[Inject(typeof(AMD))]` AMD will be injected for Processor
+- You can do the explicit injection for Constructor/Method Parameters, Property and Field by using the attribute `[Inject(typeof(..))]` i.e. `[Inject(typeof(AMD))]` AMD will be injected for Processor
 - If you don't specify the explicit injection the Primary target dependency will be injected. Please note, for abstract class and interface you must specify their Primary target dependency if you are not using the explicit injection
-  
-- You can use the attribute `[InjectValue(....)]` to supply the Constructor Parameters
 
-Now lets look at its dependencies one by one. Here is the Processors 
+- You can use the attribute `[InjectValue(....)]` to supply the dependency's constructor parameters
+
+Now let's look at its dependencies one by one. Here is the `Processor` 
 ```csharp
 [Injectable]
 public abstract class Processor { public abstract void Compute(); }
