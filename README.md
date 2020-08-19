@@ -73,7 +73,7 @@ An abstract class `Computer` composed of all its dependencies. And now here is t
 [Injectable(InstanceType = InstanceType.Local)] // A non-static instance of Desktop will be injected
 public class Desktop : Computer
 {
-    protected Desktop() { } // A protected or private needed
+    protected Desktop() { } // A protected or private default constructor is needed
 
     [AutoInject] // Constructor Injection 
     public Desktop([Inject(typeof(AMD))] Processor processor) // AMD Processor will be injected
@@ -171,7 +171,7 @@ Then comes `RAM`.
 [Injectable]
 public class RAM
 {
-    protected RAM() { } // A protected or private needed
+    protected RAM() { } // A protected or private default constructor is needed
 
     protected int _sizeInGB;
     public RAM(int sizeInGB) { this._sizeInGB = sizeInGB; }
@@ -182,7 +182,7 @@ public class RAM
 [Injectable]
 public class DDRRAM : RAM
 {
-    protected DDRRAM() { } // A protected or private needed
+    protected DDRRAM() { } // A protected or private default constructor is needed
     public DDRRAM(int sizeInGB) : base(sizeInGB) { }
 
     public override void GetReady() { Console.WriteLine(_sizeInGB + " GB - DDR RAM getting ready"); }
