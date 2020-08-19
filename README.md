@@ -6,10 +6,10 @@ A Conventional .net dependency injection framework empower developers to write l
 - Lightweight, fast and zero boilerplate code required
 - Registration and Auto-wiring by Convention
 - Inject dependencies by Type or Type name
-- Lifetime manager to manage instance life, currently local and static `default` instaces are being supported
+- Lifetime manager to manage instance life, currently local and static `default` instances are being supported
 - Controlled scanning i.e Current Namespace `default`, Recursive Namespace and Assembly
 - Very little to learn to use this framework effectively
-- Higly flexible and extensible design
+- Highly flexible and extensible design
 
 ## Release Status
 ***Under review*** - For review, please clone the repo and use the `Mxfx.DI.Lab` project to get your hand dirty. Do share your feedback and suggestion for improvement and next step.
@@ -24,7 +24,7 @@ public abstract class Animal
     public abstract void MakeSound();
 }
 ```
-An abstract class attributed as `Injectable` - it is must to have this attibute to make type as injectable.
+An abstract class attributed as `Injectable` - it is must to have this attribute to make type as injectable.
 ```csharp
 [Injectable]
 public class Cat : Animal
@@ -35,7 +35,7 @@ public class Cat : Animal
     }
 }
 ```
-Now, a class `Cat` implementing the `Animal` abtract class.
+Now, a class `Cat` implementing the `Animal` abstract class.
 
 ```csharp
 class Program
@@ -67,7 +67,7 @@ public abstract class Computer
     public abstract void InstallOS(OS osToInstall);
 }
  ```
-An abstract class `Computer` composed of all its dependecies. And now here is the implementation.
+An abstract class `Computer` composed of all its dependencies. And now here is the implementation.
 
 ```csharp
 [Injectable(InstanceType = InstanceType.Local)] // A non-static instance of Desktop will be injected
