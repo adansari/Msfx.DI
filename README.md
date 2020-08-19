@@ -146,7 +146,7 @@ public class AMD : Processor
     public override void Compute() { Console.WriteLine("AMD Processor"); }
 }
 ```
-Then we have Displays.
+Then we have `Displays`.
 
 ```csharp
 [Injectable]
@@ -165,7 +165,7 @@ public class LCDMonitor : Display
     public override void TurnON() { Console.WriteLine("LCD starting"); }
 }
 ```
-Then RAM.
+Then comes `RAM`.
 
 ```csharp
 [Injectable]
@@ -188,7 +188,7 @@ public class DDRRAM : RAM
     public override void GetReady() { Console.WriteLine(_sizeInGB + " GB - DDR RAM getting ready"); }
 }
 ```
-And finally an OS.
+And finally an `OS`.
 ```csharp
 [Injectable]
 public abstract class OS { public abstract void Operate(); }
