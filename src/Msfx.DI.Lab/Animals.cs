@@ -1,44 +1,20 @@
 ﻿using Msfx.DI.Attributes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Msfx.DI.Lab.Animals
+namespace Msfx.DI.Lab
 {
     [Injectable]
-    abstract class Animal
+    public abstract class Animal
     {
         public abstract void MakeSound();
     }
 
     [Injectable]
-    class Dog : Animal
-    {
-        public string Color { get; }
-        public Dog(string color)
-        {
-            Color = color;
-        }
-        public override void MakeSound()
-        {
-            Console.WriteLine(Color + " Dog makes sound, Bhow Bhow !!!");
-        }
-    }
-
-    [Injectable]
-    class Cat : Animal
+    public class Cat : Animal
     {
         public override void MakeSound()
         {
-            Console.WriteLine("Meow Meow !!!");
+            Console.WriteLine("Meowwww");
         }
     }
-}
-
-namespace Msfx.DI.Lab.OtherAnimals
-{
-    [Injectable]
-    class Cat { }
 }
