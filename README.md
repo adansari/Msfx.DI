@@ -112,7 +112,7 @@ var dIContext = new AttributeBasedDIContext(typeof(Program)).Scan();
 var computer = dIContext.Inject<Desktop>();
 computer.Boot();
 ```
-Output
+Output of `computer.Boot();` call
 ```console
 System booting...
 CRTMonitor starting
