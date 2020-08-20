@@ -49,7 +49,7 @@ class Program
     }
 }
 ```
-Finally, creating the `DIContext` by passing the Type `Program` from current namespace to scan the same for dependency registration.
+Finally, creating the `DIContext` by passing the Type `Program` to `AttributeBasedDIContext`. By default the namespace where class `Program` is located will be scanned for registering the dependencies attributed with `[Injectable]`.
 
 ## Usage
 Here is a more elaborative usage. 
