@@ -1,5 +1,5 @@
 # Msfx.DI
-A Conventional .net dependency injection framework empower developers to write loosely coupled components.
+A Conventional .net dependency injection framework that will empower developers to write loosely coupled components.
 
 ## Features
 - **No** default injection 
