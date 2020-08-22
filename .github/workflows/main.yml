@@ -9,10 +9,7 @@ on:
     branches: [ master ]
   workflow_dispatch:
     branches: [ master ]
-    
-env:
-  runId: ${GITHUB_RUN_NUMBER}
-  
+     
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -23,8 +20,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     
-    - name: Env details
-      run: each "github.run_id ${{github.run_id}}"
       
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Checkout the code  
@@ -54,8 +49,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }} 
+        tag_name: ${{ github.ref }}_${{github.run_id}}
+        release_name: Release ${{ github.ref }} _${{github.run_id}}
         body: |
           Preview Build dated: 2020.08.22  
         draft: false
