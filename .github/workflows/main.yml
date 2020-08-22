@@ -42,9 +42,9 @@ jobs:
       run: msbuild src\Msfx.DI.sln /p:Configuration=Release /p:OutDir=.\mfx-di-artifacts
     
     # Zip the Artifacts
-    - name: Zip Artifacts
-      run: |
-          zip mfx-di.zip --junk-paths .\mfx-di-artifacts
+    - uses: montudor/action-zip@v0.1.0
+      with:
+        args: zip -qq -r ./mfx-di.zip ./mfx-di-artifacts
        
     # Add Release Source to Github
     - name: Release
@@ -68,6 +68,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} 
-        asset_path: ./mfx-di-artifacts/mfx-di.zip
+        asset_path: ./mfx-di.zip
         asset_name: mfx-di.zip
         asset_content_type: application/zip
