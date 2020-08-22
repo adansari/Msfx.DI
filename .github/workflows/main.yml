@@ -13,19 +13,19 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  Build And Release:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - name: checkout the code  
+    - name: Checkout the code  
       uses: actions/checkout@v2
       
     # Setting the MSBuild path 
     - name: Setup the MSBuild Path
-      uses: warrenbuckley/Setup-MSBuild@v1
+      uses:  microsoft/setup-msbuild@v1.0.1
 
     # Setting the Nuget
     - name: Setup the NuGet
@@ -37,11 +37,18 @@ jobs:
       run: nuget restore src\Msfx.DI.sln
 
     # Build and Publish artifacts locally
-    - name: Build and Publish
+    - name: Build
       run: msbuild src\Msfx.DI.sln /p:Configuration=Release
       
     # Add Release to Github
     - name: Release
-      uses: fnkr/github-action-ghr@v1
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.MSFX_DI_CI_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Preview Build dated: 2020.08.22  
+        draft: false
+        prerelease: false
