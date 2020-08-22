@@ -64,6 +64,3 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} 
-        asset_path: D:\a\Msfx.DI\Msfx.DI\src\Msfx.DI\mfx-di-artifacts
-        asset_name: mfx-di-artifacts.zip
-        asset_content_type: application/zip
