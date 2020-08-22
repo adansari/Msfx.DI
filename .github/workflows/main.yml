@@ -38,7 +38,7 @@ jobs:
 
     # Build and Publish artifacts locally
     - name: Build
-      run: msbuild src\Msfx.DI.sln /p:Configuration=Release
+      run: msbuild src\Msfx.DI.sln /p:Configuration=Release /p:OutDir=.\mfx-di-artifacts
       
     # Add Release Source to Github
     - name: Release
@@ -47,8 +47,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}_$GITHUB_RUN_NUMBER
-        release_name: Release ${{ github.ref }}_$GITHUB_RUN_NUMBER
+        tag_name: ${{ github.ref }}_${{GITHUB_RUN_NUMBER}}
+        release_name: Release ${{ github.ref }}_${{GITHUB_RUN_NUMBER}}
         body: |
           Preview Build dated: 2020.08.22  
         draft: false
@@ -62,6 +62,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} 
-        asset_path: ./my-artifact.zip
-        asset_name: my-artifact.zip
+        asset_path: ./mfx-di-artifacts
+        asset_name: mfx-di-artifacts.zip
         asset_content_type: application/zip
