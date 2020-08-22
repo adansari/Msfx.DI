@@ -7,8 +7,6 @@ name: Msfx CI
 on:
   push:
     branches: [ master ]
-    tags: 
-      - v-2020 
   workflow_dispatch:
     branches: [ master ]
   
@@ -49,8 +47,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{ github.ref }}_$GITHUB_RUN_NUMBER
+        release_name: Release ${{ github.ref }}_$GITHUB_RUN_NUMBER
         body: |
           Preview Build dated: 2020.08.22  
         draft: false
