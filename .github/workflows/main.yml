@@ -49,7 +49,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: v-2020.08.22
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
         body: |
