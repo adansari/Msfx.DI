@@ -33,7 +33,6 @@ jobs:
     - name: Setup the NuGet
       uses: NuGet/setup-nuget@v1.0.2
       
-      
     # Restore Nuget packages
     - name: Restore Nuget packages
       run: nuget restore src\Msfx.DI.sln
@@ -44,7 +43,8 @@ jobs:
     
     # Zip the Artifacts
     - name: Zip Artifacts
-      run: zip mfx-di.zip --junk-paths .\mfx-di-artifacts
+      run: |
+          zip mfx-di.zip --junk-paths .\mfx-di-artifacts
        
     # Add Release Source to Github
     - name: Release
