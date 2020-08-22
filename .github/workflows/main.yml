@@ -21,7 +21,6 @@ jobs:
     steps:
     
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
- 
     - name: Checkout the code  
       uses: actions/checkout@v2
       
@@ -39,13 +38,13 @@ jobs:
 
     # Build and Publish artifacts locally
     - name: Build
-      run: msbuild src\Msfx.DI.sln /p:Configuration=Release /p:OutDir=.\mfx-di-artifacts
+      run: msbuild src\Msfx.DI.sln /p:Configuration=Release
     
     # Zip the Artifacts
     - name: Zip Artifacts
       uses: papeloto/action-zip@v1
       with:
-        files: .\mfx-di-artifacts
+        files: .\src\Msfx.DI\Release
         dest: mfx-di.zip
        
     # Add Release Source to Github
