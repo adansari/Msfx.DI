@@ -42,9 +42,11 @@ jobs:
       run: msbuild src\Msfx.DI.sln /p:Configuration=Release /p:OutDir=.\mfx-di-artifacts
     
     # Zip the Artifacts
-    - uses: montudor/action-zip@v0.1.0
+    - name: Zip Artifacts
+    - uses: papeloto/action-zip@v1
       with:
-        args: zip -qq -r ./mfx-di.zip ./mfx-di-artifacts
+        files: .\mfx-di-artifacts
+        dest: mfx-di.zip
        
     # Add Release Source to Github
     - name: Release
