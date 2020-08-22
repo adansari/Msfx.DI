@@ -34,7 +34,7 @@ jobs:
       
     # Restore Nuget packages
     - name: Restore Nuget packages
-      uses: nuget restore src\Msfx.DI.sln
+      run: nuget restore src\Msfx.DI.sln
 
     # Build and Publish artifacts locally
     - name: Build and Publish
