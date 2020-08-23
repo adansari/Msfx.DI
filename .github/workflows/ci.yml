@@ -7,11 +7,11 @@ name: Msfx.DI CI
 on:
 
   push:
+    branches: [ master ]
     paths-ignore:
       -'README.md'
       -'.github/**'
       -'.gitignore'
-    branches: [ master ]
       
   workflow_dispatch:
     branches: [ master ]
