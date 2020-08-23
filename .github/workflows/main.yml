@@ -5,8 +5,10 @@ name: Msfx.DI Release
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches: [ master ]
+      
   workflow_dispatch:
     branches: [ master ]
      
@@ -39,7 +41,15 @@ jobs:
     # Build and Publish artifacts locally
     - name: Build
       run: msbuild src\Msfx.DI.sln /p:Configuration=Release
-    
+      
+    # Setup the VS Test runnuer  
+    - name: Setup VSTest Path
+      uses: darenm/Setup-VSTest@v1
+      
+    # Run the tests  
+    - name: Tets
+      run: vstest.console.exe src\Msfx.DITests\bin\Release\Msfx.DI.Tests.dll
+      
     # Zip the Artifacts
     - name: Zip Artifacts
       uses: papeloto/action-zip@v1
