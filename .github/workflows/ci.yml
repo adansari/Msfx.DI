@@ -9,7 +9,7 @@ on:
   push:
     paths-ignore:
       -'README.md'
-      -'.github/workflows/**'
+      -'.github/**'
       -'.gitignore'
     branches: [ master ]
       
