@@ -9,9 +9,8 @@ on:
   push:
     branches: [ master ]
     
-    paths-ignore:
-     -'README.md'
-     - '.github'
+    paths:
+     -'src/**'
       
   workflow_dispatch:
     branches: [ master ]
