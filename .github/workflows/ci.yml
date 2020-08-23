@@ -7,8 +7,10 @@ name: Msfx.DI CI
 on:
 
   push:
-    paths:
-      -'src/**'
+    paths-ignore:
+      -'README.md'
+      -'.github/workflows/**'
+      -'.gitignore'
     branches: [ master ]
       
   workflow_dispatch:
