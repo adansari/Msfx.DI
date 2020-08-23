@@ -1,7 +1,7 @@
 # Msfx.DI
 A Conventional .net dependency injection framework that will empower developers to write loosely coupled components.
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/adansari/Msfx.DI/Msfx.DI%20CI)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/adansari/Msfx.DI/Msfx.DI%20CI?label=CI&logo=Github)
 
 ## Features
 - **No** default injection 
