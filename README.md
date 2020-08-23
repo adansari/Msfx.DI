@@ -2,6 +2,7 @@
 A Conventional .net dependency injection framework that will empower developers to write loosely coupled components.
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/adansari/Msfx.DI/Msfx.DI%20CI?label=CI&logo=Github)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/adansari/Msfx.DI)
 
 ## Features
 - **No** default injection 
