@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+# CI workflow, on push on master, builds and run the tests
 
 name: Msfx.DI CI
 
@@ -8,6 +8,9 @@ on:
 
   push:
     branches: [ master ]
+
+    paths-ignore:
+    -'README.md'
       
   workflow_dispatch:
     branches: [ master ]
