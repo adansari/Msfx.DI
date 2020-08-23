@@ -5,9 +5,6 @@ name: Msfx.DI CI
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  pull_request:
-    types: [opened]
-    branches: [ master ]
 
   push:
     branches: [ master ]
@@ -18,7 +15,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build_test:
+  build:
     # The type of runner that the job will run on
     runs-on: windows-latest
 
@@ -48,7 +45,8 @@ jobs:
     # Build
     - name: Build the Solution
       run: msbuild src\Msfx.DI.sln /p:Configuration=Release
-
+  
+  test:
       
     # Run the tests  
     - name: Run Tests
