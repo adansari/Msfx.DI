@@ -15,7 +15,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  build_test:
     # The type of runner that the job will run on
     runs-on: windows-latest
 
@@ -46,8 +46,6 @@ jobs:
     - name: Build the Solution
       run: msbuild src\Msfx.DI.sln /p:Configuration=Release
   
-  test:
-      
     # Run the tests  
     - name: Run Tests
       run: vstest.console.exe src\Msfx.DITests\bin\Release\Msfx.DI.Tests.dll
