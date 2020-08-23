@@ -23,44 +23,44 @@ jobs:
     steps:
     
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - name: checkout the code  
+    - name: Checkout the code  
       uses: actions/checkout@v2
 
     # Setup Nuget
-    - name: setup-nuget
+    - name: setup Nuget
       uses: NuGet/setup-nuget@v1.0.2
       
     # Setup MSBuild 
-    - name: setup-msbuild
+    - name: Set up MSBuild
       uses:  microsoft/setup-msbuild@v1.0.1
 
     # Setup VS Test
-    - name: setup-vstest
+    - name: Set up VSTest runner
       uses: darenm/Setup-VSTest@v1
       
     # Restore
-    - name: restore
+    - name: Restore Nuget Packages
       run: nuget restore src\Msfx.DI.sln
 
     # Build
-    - name: build
+    - name: Build the Solution
       run: msbuild src\Msfx.DI.sln /p:Configuration=Release
 
       
     # Run the tests  
-    - name: test
+    - name: Run Tests
       run: vstest.console.exe src\Msfx.DITests\bin\Release\Msfx.DI.Tests.dll
       
     # Zip the Artifacts
-    - name: zip
+    - name: Zip Release Artifacts
       uses: papeloto/action-zip@v1
       with:
         files: src/Msfx.DI/bin/Release
         dest: mfx-di.zip
        
     # Create Github Release 
-    - name: create-release
-      id: create-release
+    - name: Create Release
+      id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,55 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Msfx.DI CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  pull_request:
+    types: [opened]
+    branches: [ master ]
+
+   push:
+    branches: [ master ]
+      
+  workflow_dispatch:
+    branches: [ master ]
+     
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build_release:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Checkout the code  
+      uses: actions/checkout@v2
+
+    # Setup Nuget
+    - name: setup Nuget
+      uses: NuGet/setup-nuget@v1.0.2
+      
+    # Setup MSBuild 
+    - name: Set up MSBuild
+      uses:  microsoft/setup-msbuild@v1.0.1
+
+    # Setup VS Test
+    - name: Set up VSTest runner
+      uses: darenm/Setup-VSTest@v1
+      
+    # Restore
+    - name: Restore Nuget Packages
+      run: nuget restore src\Msfx.DI.sln
+
+    # Build
+    - name: Build the Solution
+      run: msbuild src\Msfx.DI.sln /p:Configuration=Release
+
+      
+    # Run the tests  
+    - name: Run Tests
+      run: vstest.console.exe src\Msfx.DITests\bin\Release\Msfx.DI.Tests.dll
