@@ -9,7 +9,7 @@ on:
     types: [opened]
     branches: [ master ]
 
-   push:
+  push:
     branches: [ master ]
       
   workflow_dispatch:
