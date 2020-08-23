@@ -277,7 +277,7 @@ namespace Msfx.DI.Tests
             //act
             foo foo = mockDIContext.Object.InjectByName<foo>("NotExists");
 
-            //assert
+            //assert 
             Assert.IsNull(foo);
         }
     }
