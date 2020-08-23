@@ -72,7 +72,7 @@ namespace Msfx.DI.Tests
         {
             //arrange
             Mock<IDependencyHolder> mockDependencyHolder = new Mock<IDependencyHolder>();
-            mockDependencyHolder.Setup(dh =>dh.GetInstance(It.IsAny<object[]>())).Returns(new foo());
+            mockDependencyHolder.Setup(dh => dh.GetInstance(It.IsAny<object[]>())).Returns(new foo());
 
             Mock<IDependencyMap> mockDependencyMap = new Mock<IDependencyMap>();
             mockDependencyMap.Setup(dm => dm.PrimaryDependencyHolder).Returns(mockDependencyHolder.Object);
@@ -163,7 +163,7 @@ namespace Msfx.DI.Tests
             //arrange
             Mock<IDependencyHolder> mockDependencyHolder = new Mock<IDependencyHolder>();
             mockDependencyHolder.Setup(dh => dh.GetInstance(It.IsAny<object[]>())).Returns(new Cat());
-           
+
             Mock<IDependencyMap> mockDependencyMap = new Mock<IDependencyMap>();
             mockDependencyMap.Setup(dm => dm.GetSecondaryDependencyHolder(It.IsAny<string>())).Returns(mockDependencyHolder.Object);
 
@@ -279,6 +279,12 @@ namespace Msfx.DI.Tests
 
             //assert
             Assert.IsNull(foo);
+        }
+
+        [TestMethod]
+        public void DIContext_Failing_Test()
+        {
+            Assert.Fail();
         }
     }
 }
