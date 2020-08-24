@@ -23,6 +23,6 @@ jobs:
       run: echo Hello, ${{ github.actor }}!
       
     - name: Echo current date
-      run: echo date
+      run: echo $(Get-Date -format "yy.MM.dd")
 
 
