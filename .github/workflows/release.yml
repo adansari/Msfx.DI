@@ -67,10 +67,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}_tag_${{ steps.generate_version.outputs.version }}
+        tag_name: ${{ steps.generate_version.outputs.version }}
         release_name: ${{ steps.generate_version.outputs.version }}
         body: |
-          Preview Build dated:  - coming soon -
+          Preview version.
         draft: false
         prerelease: false
      
