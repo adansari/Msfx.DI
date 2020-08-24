@@ -21,4 +21,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: Run a one-line script
       run: echo Hello, ${{ github.actor }}!
+      
+    - name: Echo current date
+      run: echo '%date%'
 
