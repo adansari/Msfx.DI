@@ -24,4 +24,5 @@ jobs:
       
     - name: Echo current date
       run: echo %date%
+      shell: cmd
 
