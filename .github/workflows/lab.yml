@@ -23,6 +23,11 @@ jobs:
       run: echo Hello, ${{ github.actor }}!
       
     - name: Echo current date
-      run: echo $(Get-Date -format "yy.MM.dd")
+      id: generate_version
+      run: echo "::set-output name=version::v-$(Get-Date -format 'yy.MM.dd')"
+      
+    - name: Echo version
+      run: echo version=${{ steps.generate_version.outputs.version }}
+      
 
 
