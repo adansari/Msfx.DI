@@ -2,7 +2,7 @@
 A Conventional .net dependency injection framework that will empower developers to write loosely coupled components.
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/adansari/Msfx.DI/Msfx.DI%20CI?label=CI&logo=Github)
-![GitHub release (latest by date](https://github.com/adansari/Msfx.DI/releases/download/v-0.20.08.24-preview/mfx-di.zip) 
+![GitHub release (latest by date]((https://img.shields.io/github/v/release/adansari/Msfx.DI?label=Release&logo=GitHub)) 
 ![GitHub All Releases](https://img.shields.io/github/downloads/adansari/Msfx.DI/total)
 
 ## Features
@@ -16,7 +16,7 @@ A Conventional .net dependency injection framework that will empower developers 
 - Highly flexible and extensible design
 
 ## Release Status
-***Under review*** - For review, please clone the repo and use the `Mxfx.DI.Lab` project to get your hand dirty. Do share your feedback and suggestion for improvement and next step.
+***Under review*** - For review, please clone the repo and use the `Mxfx.DI.Lab` project to get your hand dirty. Do share your feedback and suggestion for improvement and next step. OR Download the binaries from [here](https://img.shields.io/github/v/release/adansari/Msfx.DI?label=Release&logo=GitHub)
 
 ## Getting Started
 Lets get started with very basic example. 
