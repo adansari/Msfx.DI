@@ -57,7 +57,8 @@ jobs:
     
     # Generate the Release version
     - name: Generate Release version
-      run: echo "::set-output name=version::v-$(Get-Date -format 'yy.MM.dd')"
+      id: generate_version
+      run: echo "::set-output name=version::v-$(Get-Date -format '0.yy.MM.dd')-preview"
       
     # Create Github Release 
     - name: Create Release
@@ -69,7 +70,7 @@ jobs:
         tag_name: ${{ github.ref }}_tag_${{ steps.generate_version.outputs.version }}
         release_name: ${{ steps.generate_version.outputs.version }}
         body: |
-          Preview Build dated: $(Get-Date)  
+          Preview Build dated:  - coming soon -
         draft: false
         prerelease: false
      
