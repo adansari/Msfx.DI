@@ -1,0 +1,34 @@
+Your Contribution Matters
+
+Dear Colleagues and Friends,
+
+Hope you and your family is safe and in good health!
+
+I am glad to inform you that I am open sourcing the .Net dependency injection framework, I know this isn't something new and plenty of them are already there. 
+
+Though starting my open source journey with a conventional dependency injection framework which is a one of the very important aspect of the software design and it goes hand in hand with various Tech-Agile practices. Right now, it isn't yet released and is under preview.
+
+Cordially inviting you to be part of this exiting journey and have your contribution in some way or other. 
+You may:
+- Download/Clone the code and samples and give it a try and share your feedback
+- Help promoting this project
+- Be a part of it and add new features, fix bugs, write documentations and develope extensions
+- Become the advisor or mentor and contribute in creating the road-map, licencing, architecture and design
+
+Here is the Github Repository URL: https://github.com/adansari/Msfx.DI
+
+Code Samples: https://github.com/adansari/Msfx.DI/blob/master/README.md
+
+Finally would like to thank you for all your help you extended in during the development.
+
+Looking forward for your contribution!!
+
+Regards,
+Adil
+
+
+
+
+
+
+
