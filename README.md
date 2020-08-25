@@ -211,7 +211,7 @@ public class Linux : OS
 }
 ```
 ## Tech-specs
-- Build on .Net 4.5 and uses reflection
+- Build on .Net 4.6.1 and uses reflection
 - Uses [ConcurrentDictionary<TKey,TValue> Class](https://docs.microsoft.com/en-us/dotnet/api/system.collections.concurrent.concurrentdictionary-2?view=netcore-3.1) as underlying thread-safe data structure as dependency container
 - Uses `MSTest` and `Moq 4` for unit testing and mocking
 - Code coverage is ~100% with 85% unit tests and 15% integration tests
