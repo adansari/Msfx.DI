@@ -1,4 +1,7 @@
 version: 1.0.{build}
+only_commits:
+  files:
+    - src/
 image: Visual Studio 2017
 before_build:
 - cmd: nuget restore src\Msfx.DI.sln
