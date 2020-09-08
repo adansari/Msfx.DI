@@ -19,9 +19,9 @@ A Conventional .net dependency injection framework that will empower developers 
 - Highly flexible and extensible design
 
 ## Release Status
-***Under review*** - For review, please clone the repo and use the `Mxfx.DI.Lab` project to get your hand dirty. Do share your feedback and suggestion for improvement and next step.
+***Under Review*** - For review, please clone the repo and use the `Mxfx.DI.Lab` project to get your hand dirty. Do share your feedback and suggestion for improvement and next step.
 
-**Download** the binaries from [here](https://github.com/adansari/Msfx.DI/releases/download/v-0.20.08.24-preview/mfx-di.zip)
+***To download*** the binaries, click [here](https://github.com/adansari/Msfx.DI/releases/download/v-0.20.08.24-preview/mfx-di.zip)
 
 > **Important**
 > This is a first preview release of the Msfx.DI library. If you encounter issues please log them in https://github.com/adansari/Msfx.DI/issues
