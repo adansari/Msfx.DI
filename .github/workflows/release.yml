@@ -53,7 +53,7 @@ jobs:
       uses: papeloto/action-zip@v1
       with:
         files: src/Msfx.DI/bin/Release
-        dest: mfx-di.zip
+        dest: msfx-di.zip
     
     # Generate the Release version
     - name: Generate Release version
