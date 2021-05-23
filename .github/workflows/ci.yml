@@ -30,7 +30,7 @@ jobs:
 
     # Setup Nuget
     - name: Set up the Nuget
-      uses: NuGet/setup-nuget@v1.0.2
+      uses: NuGet/setup-nuget@v1.0.5
       
     # Setup MSBuild 
     - name: Set up MSBuild
