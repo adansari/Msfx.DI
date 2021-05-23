@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1062
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Msfx.DI", "Msfx.DI\Msfx.DI.csproj", "{6BB35FE1-FD3A-4F92-A952-EE1261BFDCC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Msfx.DI", "Msfx.DI\Msfx.DI.csproj", "{6BB35FE1-FD3A-4F92-A952-EE1261BFDCC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Msfx.DI.Tests", "Msfx.DITests\Msfx.DI.Tests.csproj", "{E92C0860-E244-40C5-AA35-82E933BF1E34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Msfx.DI.FakeAssembly", "Msfx.DI.FakeAssembly\Msfx.DI.FakeAssembly.csproj", "{468A93E1-7F5D-48BE-8D3D-C030BBC72B83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Msfx.DI.Lab", "Msfx.DI.Lab\Msfx.DI.Lab.csproj", "{434B51F6-E947-4DC7-9E6C-27C61B2474C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Msfx.DI.Samples.MVC", "Msfx.DI.Samples.MVC\Msfx.DI.Samples.MVC.csproj", "{B435CFAC-BFBA-44A0-AB7E-ADF21DCACC14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{434B51F6-E947-4DC7-9E6C-27C61B2474C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{434B51F6-E947-4DC7-9E6C-27C61B2474C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{434B51F6-E947-4DC7-9E6C-27C61B2474C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B435CFAC-BFBA-44A0-AB7E-ADF21DCACC14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B435CFAC-BFBA-44A0-AB7E-ADF21DCACC14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B435CFAC-BFBA-44A0-AB7E-ADF21DCACC14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B435CFAC-BFBA-44A0-AB7E-ADF21DCACC14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

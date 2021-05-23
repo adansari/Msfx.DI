@@ -17,7 +17,9 @@ namespace Msfx.DI.Lab
         {
             var dIContext = new AttributeBasedDIContext(typeof(Program),DependencyScanTarget.CurrentNamespaceRecursive).Scan();
 
-            IPoke  poker = dIContext.InjectByName<IPoke>("WebPoke","https://www.google.com");
+            IPoke poker;// = dIContext.Inject<IPoke>("https://www.google.com"); // <-- default injection
+
+            poker = dIContext.Inject<IPoke>(typeof(IPoke),"https://www.google.com"); //<-- named injection
 
             Console.WriteLine(poker.Poke());
 

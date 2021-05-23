@@ -280,5 +280,49 @@ namespace Msfx.DI.Tests
             //assert
             Assert.IsNull(foo);
         }
+
+        [TestMethod]
+        public void DIContext_InjectByType_Test()
+        {
+            //arrange
+            Mock<IDependencyHolder> mockDependencyHolder = new Mock<IDependencyHolder>();
+            mockDependencyHolder.Setup(dh => dh.GetInstance(It.IsAny<object[]>())).Returns(new Cat());
+
+            Mock<IDependencyMap> mockDependencyMap = new Mock<IDependencyMap>();
+            mockDependencyMap.Setup(dm => dm.PrimaryDependencyHolder).Returns(mockDependencyHolder.Object);
+
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
+            mockContainer.Setup(c => c.ContainsDependency(It.IsAny<string>())).Returns(true);
+            mockContainer.Setup(c => c.GetDependencyMap(It.IsAny<string>())).Returns(mockDependencyMap.Object);
+
+            Mock<DIContext> mockDIContext = new Mock<DIContext>(typeof(Boot)) { CallBase = true };
+            mockDIContext.SetupGet(ctx => ctx.Container).Returns(mockContainer.Object);
+
+            //act
+            Animal animal = mockDIContext.Object.Inject<Animal>(typeof(Cat));
+
+            //assert
+            Assert.IsInstanceOfType(animal, typeof(Cat));
+        }
+
+        [TestMethod]
+        public void DIContext_InjectByType_NonClass_Test()
+        {
+            //arrange
+            Mock<IDependencyMap> mockDependencyMap = new Mock<IDependencyMap>();
+         
+            Mock<IDIContainer> mockContainer = new Mock<IDIContainer>();
+            mockContainer.Setup(c => c.ContainsDependency(It.IsAny<string>())).Returns(true);
+            mockContainer.Setup(c => c.GetDependencyMap(It.IsAny<string>())).Returns(mockDependencyMap.Object);
+
+            Mock<DIContext> mockDIContext = new Mock<DIContext>(typeof(Boot)) { CallBase = true };
+            mockDIContext.SetupGet(ctx => ctx.Container).Returns(mockContainer.Object);
+
+            //act
+            Animal animal = mockDIContext.Object.Inject<Animal>(typeof(Animal));
+
+            //assert
+            Assert.IsNull(animal);
+        }
     }
 }

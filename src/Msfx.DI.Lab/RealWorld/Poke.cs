@@ -16,7 +16,7 @@ namespace Msfx.DI.Lab.RealWorld
     }
 
     [Injectable]
-    [InjectFor(typeof(IPoke))]
+    //[InjectFor(typeof(IPoke))]
     public class DummyPoke : IPoke
     {
         private string _siteUri;

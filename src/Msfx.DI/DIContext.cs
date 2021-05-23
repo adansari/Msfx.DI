@@ -47,9 +47,20 @@ namespace Msfx.DI
         {
             string dependencyId = typeof(T).GetDependencyId();
 
-            if (this.Container.ContainsDependency(dependencyId))
+            if (this.Container.ContainsDependency(dependencyId) && this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder != null)
             {
-                //Todo: For Interface/Abs Class dont have any Preferred imple class, PrimaryDependencyHolder is null - Need to handle 
+                return (T)this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder.GetInstance(args);
+            }
+
+            return default(T);
+        }
+
+        public virtual T Inject<T>(Type type, params object[] args)
+        {
+            string dependencyId = type.GetDependencyId();
+
+            if (this.Container.ContainsDependency(dependencyId) && this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder!=null)
+            {
                 return (T)this.Container.GetDependencyMap(dependencyId).PrimaryDependencyHolder.GetInstance(args);
             }
 
