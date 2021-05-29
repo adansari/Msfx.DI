@@ -39,7 +39,7 @@ jobs:
         PACKAGE_NAME: Msfx.DI
         
         # Static version, ignores VERSION_FILE_PATH & VERSION_REGEX
-        VERSION_STATIC: ${{env.Msfx_DI_Nuget_Version}}
+        #VERSION_STATIC: ${{env.Msfx_DI_Nuget_Version}}
         
         # API key to authenticate with NuGet server
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
