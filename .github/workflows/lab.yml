@@ -32,16 +32,16 @@ jobs:
     #  uses:  microsoft/setup-msbuild@v1.0.2
 
     # Setup VS Test
-    - name: Set up VSTest runner
-      uses: darenm/Setup-VSTest@v1
+    #- name: Set up VSTest runner
+    #  uses: darenm/Setup-VSTest@v1
       
     # Restore
     #- name: Restore Nuget Packages
     #  run: nuget restore src\Msfx.DI.sln
 
     # Build
-    - name: Build the Solution
-      run: msbuild src\Msfx.DI.sln /p:Configuration=Release
+    #- name: Build the Solution
+    #  run: msbuild src\Msfx.DI.sln /p:Configuration=Release
 
       
     # Run the tests  
