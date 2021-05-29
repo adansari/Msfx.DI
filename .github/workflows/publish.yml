@@ -1,6 +1,6 @@
 # Release workflow, manual, generate the release artifacts
 
-name: Msfx.DI Lab
+name: Msfx.DI Publish
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -13,8 +13,12 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   nuget_publish:
-    # The type of runner that the job will run on
+  
+    # Run Action on latest windwos
     runs-on: windows-latest
+    
+    env:
+     Msfx_DI_Nuget_Version: 1.0.1
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -22,31 +26,6 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Checkout the code  
       uses: actions/checkout@v2
-
-    # Setup Nuget
-    #- name: Set up the Nuget
-    #  uses: NuGet/setup-nuget@v1.0.5
-      
-    # Setup MSBuild 
-    #- name: Set up MSBuild
-    #  uses:  microsoft/setup-msbuild@v1.0.2
-
-    # Setup VS Test
-    #- name: Set up VSTest runner
-    #  uses: darenm/Setup-VSTest@v1
-      
-    # Restore
-    #- name: Restore Nuget Packages
-    #  run: nuget restore src\Msfx.DI.sln
-
-    # Build
-    #- name: Build the Solution
-    #  run: msbuild src\Msfx.DI.sln /p:Configuration=Release
-
-      
-    # Run the tests  
-    #- name: Run Tests
-    #  run: vstest.console.exe src\Msfx.DITests\bin\Release\Msfx.DI.Tests.dll
       
     # Publish to Nuget
     - name: Publish
@@ -60,7 +39,7 @@ jobs:
         PACKAGE_NAME: Msfx.DI
         
         # Static version, ignores VERSION_FILE_PATH & VERSION_REGEX
-        VERSION_STATIC: 1.0.0
+        #VERSION_STATIC: ${{env.Msfx_DI_Nuget_Version}}
         
         # API key to authenticate with NuGet server
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}

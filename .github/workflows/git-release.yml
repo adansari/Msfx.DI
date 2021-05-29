@@ -1,6 +1,6 @@
 # Release workflow, manual, generate the release artifacts
 
-name: Msfx.DI Release
+name: Msfx.DI GitHub Release
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -25,11 +25,11 @@ jobs:
 
     # Setup Nuget
     - name: Set up the Nuget
-      uses: NuGet/setup-nuget@v1.0.2
+      uses: NuGet/setup-nuget@v1.0.5
       
     # Setup MSBuild 
     - name: Set up MSBuild
-      uses:  microsoft/setup-msbuild@v1.0.1
+      uses:  microsoft/setup-msbuild@v1.0.2
 
     # Setup VS Test
     - name: Set up VSTest runner

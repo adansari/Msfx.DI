@@ -4,7 +4,7 @@ A Conventional .net dependency injection framework that will empower developers 
 [![Build status](https://ci.appveyor.com/api/projects/status/0hrafpgy42qid1f4?svg=true)](https://ci.appveyor.com/project/adansari/msfx-di)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/adansari/Msfx.DI/Msfx.DI%20CI?label=ci&logo=Github)
 
-[![GitHub release (latest by date](https://img.shields.io/github/v/release/adansari/Msfx.DI?label=release&logo=GitHub)](https://github.com/adansari/Msfx.DI/releases/download/v-0.20.10.23-preview/msfx-di.zip)
+[![GitHub release (latest by date](https://img.shields.io/github/v/release/adansari/Msfx.DI?label=release&logo=GitHub)](https://github.com/adansari/Msfx.DI/releases/download/v-0.21.05.23-preview/msfx-di.zip)
 
 ![GitHub All Releases](https://img.shields.io/github/downloads/adansari/Msfx.DI/total)
 
@@ -21,7 +21,7 @@ A Conventional .net dependency injection framework that will empower developers 
 ## Release Status
 ***Under Review*** - For review, please clone the repo and use the `Mxfx.DI.Lab` project to get your hand dirty. Do share your feedback and suggestion for improvement and next step.
 
-***To Download*** the binaries, click [here](https://github.com/adansari/Msfx.DI/releases/download/v-0.20.10.23-preview/msfx-di.zip)
+***To Download*** the binaries, click [here](https://github.com/adansari/Msfx.DI/releases/download/v-0.21.05.23-preview/msfx-di.zip)
 
 > **Important**
 > This is a first preview release of the Msfx.DI library. If you encounter issues please log them in https://github.com/adansari/Msfx.DI/issues
