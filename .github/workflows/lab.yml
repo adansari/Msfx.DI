@@ -1,33 +1,63 @@
-# This is a basic workflow to help you get started with Actions
+# Release workflow, manual, generate the release artifacts
 
-name: Lab
+name: Msfx.DI Release
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
+     
   workflow_dispatch:
     branches: [ master ]
-  
+     
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  test:
+  build_test_release:
     # The type of runner that the job will run on
     runs-on: windows-latest
-    
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Checkout the code  
+      uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, ${{ github.actor }}!
+    # Setup Nuget
+    - name: Set up the Nuget
+      uses: NuGet/setup-nuget@v1.0.5
       
-    - name: Echo current date
-      id: generate_version
-      run: echo "::set-output name=version::v-$(Get-Date -format 'yy.MM.dd')"
-      
-    - name: Echo version
-      run: echo version=${{ steps.generate_version.outputs.version }}
-      
+    # Setup MSBuild 
+    - name: Set up MSBuild
+      uses:  microsoft/setup-msbuild@v1.0.2
 
+    # Setup VS Test
+    - name: Set up VSTest runner
+      uses: darenm/Setup-VSTest@v1
+      
+    # Restore
+    - name: Restore Nuget Packages
+      run: nuget restore src\Msfx.DI.sln
 
+    # Build
+    - name: Build the Solution
+      run: msbuild src\Msfx.DI.sln /p:Configuration=Release
+
+      
+    # Run the tests  
+    - name: Run Tests
+      run: vstest.console.exe src\Msfx.DITests\bin\Release\Msfx.DI.Tests.dll
+      
+    # Publish to Nuget
+    - name: Publish
+      id: publish_nuget
+      uses: rohith/publish-nuget@v2
+      with:
+        # Filepath of the project to be packaged, relative to root of repository
+        PROJECT_FILE_PATH: src\Msfx.DI\Msfx.DI.csproj
+        
+        # API key to authenticate with NuGet server
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+        
+        # NuGet server uri hosting the packages, defaults to https://api.nuget.org
+        NUGET_SOURCE: https://api.nuget.org
