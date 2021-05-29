@@ -16,6 +16,9 @@ jobs:
   
     # Run Action on latest windwos
     runs-on: windows-latest
+    
+    env:
+     Msfx_DI_Nuget_Version: 1.0.1
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,7 +39,7 @@ jobs:
         PACKAGE_NAME: Msfx.DI
         
         # Static version, ignores VERSION_FILE_PATH & VERSION_REGEX
-        VERSION_STATIC: 1.0.0
+        VERSION_STATIC: ${{env.Msfx_DI_Nuget_Version}}
         
         # API key to authenticate with NuGet server
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
