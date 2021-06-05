@@ -11,7 +11,7 @@ A Conventional .net dependency injection framework that will empower developers 
 ## Features
 - **No** default injection 
 - Lightweight, fast and zero boilerplate code required
-- Registration and Auto-wiring by Convention
+- Registration and Auto-wiring through Attributes
 - Inject dependencies by Type or Type name
 - Lifetime manager to manage instance life, currently local and static `default` instances are being supported
 - Controlled scanning i.e Current Namespace `default`, Recursive Namespace and Assembly
