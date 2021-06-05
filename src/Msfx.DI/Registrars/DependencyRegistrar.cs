@@ -41,7 +41,7 @@ namespace Msfx.DI.Registrars
         public static DependencyRegistrar BuildRegistrarChain(IDIContainer dIContainer)
         {
             return new InjectableDependencyRegistrar(
-                    new InjectForTypeDependencyRegistrar(
+                    new InjectForDependencyRegistrar(
                         new CanBeInjectedDependencyRegistrar(
                             null, dIContainer)
                         , dIContainer)

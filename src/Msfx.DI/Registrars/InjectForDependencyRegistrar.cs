@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Msfx.DI.Registrars
 {
-    public class InjectForTypeDependencyRegistrar : DependencyRegistrar
+    public class InjectForDependencyRegistrar : DependencyRegistrar
     {
-        public InjectForTypeDependencyRegistrar(IDIContainer container) : base(container)
+        public InjectForDependencyRegistrar(IDIContainer container) : base(container)
         { }
-        public InjectForTypeDependencyRegistrar(DependencyRegistrar successor, IDIContainer container) : base(successor, container)
+        public InjectForDependencyRegistrar(DependencyRegistrar successor, IDIContainer container) : base(successor, container)
         { }
         public override void Register(IEnumerable<Type> types)
         {

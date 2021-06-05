@@ -17,7 +17,7 @@ namespace Msfx.DI.Registrars.Tests
     {
         ConcurrentDictionary<string, IDependencyMap> fakeConDict;
         Mock<ConcurrentDictDIContainer> mockDIContainer;
-        Mock<InjectForTypeDependencyRegistrar> mockInjectForTypeRegistrar;
+        Mock<InjectForDependencyRegistrar> mockInjectForTypeRegistrar;
 
         [TestInitialize]
         public void Init()
@@ -35,7 +35,7 @@ namespace Msfx.DI.Registrars.Tests
             mockDIContainer.Setup(c => c.GetDependencyMap(typeof(Donkey).GetDependencyId())).Returns(fakeConDict[typeof(Donkey).GetDependencyId()]);
             mockDIContainer.Setup(c => c.GetDependencyMap(typeof(Dog).GetDependencyId())).Returns(fakeConDict[typeof(Dog).GetDependencyId()]);
 
-            mockInjectForTypeRegistrar = new Mock<InjectForTypeDependencyRegistrar>(mockDIContainer.Object) { CallBase = true };
+            mockInjectForTypeRegistrar = new Mock<InjectForDependencyRegistrar>(mockDIContainer.Object) { CallBase = true };
         }
 
         [TestMethod]
