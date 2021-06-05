@@ -89,7 +89,7 @@ namespace Msfx.DI.Registrars.Tests
             Assert.IsInstanceOfType(dependencyRegistrar, typeof(InjectableDependencyRegistrar));
 
             Assert.IsNotNull(dependencyRegistrar.Successor);
-            Assert.IsInstanceOfType(dependencyRegistrar.Successor, typeof(InjectForTypeDependencyRegistrar));
+            Assert.IsInstanceOfType(dependencyRegistrar.Successor, typeof(InjectForDependencyRegistrar));
 
             Assert.IsNotNull(dependencyRegistrar.Successor.Successor);
             Assert.IsInstanceOfType(dependencyRegistrar.Successor.Successor, typeof(CanBeInjectedDependencyRegistrar));
